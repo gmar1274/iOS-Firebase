@@ -7,23 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CEDF90281DE2F0D20070D0A0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF90271DE2F0D20070D0A0 /* Store.swift */; };
 		CEEF17A51DE25564005D46E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17A41DE25564005D46E2 /* AppDelegate.swift */; };
-		CEEF17A71DE25564005D46E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17A61DE25564005D46E2 /* ViewController.swift */; };
+		CEEF17A71DE25564005D46E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17A61DE25564005D46E2 /* LoginViewController.swift */; };
 		CEEF17AA1DE25564005D46E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEF17A81DE25564005D46E2 /* Main.storyboard */; };
 		CEEF17AD1DE25564005D46E2 /* ACBAReserveMeiOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17AB1DE25564005D46E2 /* ACBAReserveMeiOS.xcdatamodeld */; };
 		CEEF17AF1DE25564005D46E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEF17AE1DE25564005D46E2 /* Assets.xcassets */; };
 		CEEF17B21DE25564005D46E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEF17B01DE25564005D46E2 /* LaunchScreen.storyboard */; };
+		CEEF17BF1DE2611D005D46E2 /* MainTabControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17BE1DE2611D005D46E2 /* MainTabControllerViewController.swift */; };
+		CEEF17C21DE261BD005D46E2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17C11DE261BD005D46E2 /* MainViewController.swift */; };
+		CEEF17C71DE263D3005D46E2 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEF17C61DE263D3005D46E2 /* Stripe.framework */; };
+		CEEF17C81DE263D3005D46E2 /* Stripe.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEEF17C61DE263D3005D46E2 /* Stripe.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CEEF17CF1DE26F7F005D46E2 /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17CE1DE26F7F005D46E2 /* PostRequest.swift */; };
+		CEEF17D31DE29349005D46E2 /* String+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17D21DE29349005D46E2 /* String+Encryption.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CEEF17C91DE263D3005D46E2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CEEF17C81DE263D3005D46E2 /* Stripe.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		CEDF90271DE2F0D20070D0A0 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		CEEF17A11DE25564005D46E2 /* ACBAReserveMeiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACBAReserveMeiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEF17A41DE25564005D46E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CEEF17A61DE25564005D46E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CEEF17A61DE25564005D46E2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CEEF17A91DE25564005D46E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEEF17AC1DE25564005D46E2 /* ACBAReserveMeiOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ACBAReserveMeiOS.xcdatamodel; sourceTree = "<group>"; };
 		CEEF17AE1DE25564005D46E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEEF17B11DE25564005D46E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEEF17B31DE25564005D46E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEEF17B91DE2559B005D46E2 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = ../../Desktop/Stripe.framework; sourceTree = "<group>"; };
+		CEEF17BE1DE2611D005D46E2 /* MainTabControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabControllerViewController.swift; path = ../MainTabControllerViewController.swift; sourceTree = "<group>"; };
+		CEEF17C11DE261BD005D46E2 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CEEF17C61DE263D3005D46E2 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Stripe.framework; sourceTree = "<group>"; };
+		CEEF17CE1DE26F7F005D46E2 /* PostRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
+		CEEF17D21DE29349005D46E2 /* String+Encryption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Encryption.swift"; sourceTree = "<group>"; };
+		CEEF17D41DE2A103005D46E2 /* Encryption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Encryption.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,15 +60,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEF17C71DE263D3005D46E2 /* Stripe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CEDF90261DE2F0A20070D0A0 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF90271DE2F0D20070D0A0 /* Store.swift */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		CEEF17981DE25564005D46E2 = {
 			isa = PBXGroup;
 			children = (
+				CEEF17C61DE263D3005D46E2 /* Stripe.framework */,
+				CEEF17B91DE2559B005D46E2 /* Stripe.framework */,
 				CEEF17A31DE25564005D46E2 /* ACBAReserveMeiOS */,
 				CEEF17A21DE25564005D46E2 /* Products */,
 			);
@@ -56,15 +96,53 @@
 		CEEF17A31DE25564005D46E2 /* ACBAReserveMeiOS */ = {
 			isa = PBXGroup;
 			children = (
+				CEDF90261DE2F0A20070D0A0 /* Objects */,
+				CEEF17D11DE2932A005D46E2 /* Utils */,
+				CEEF17D01DE26F88005D46E2 /* WebService */,
+				CEEF17C01DE2618F005D46E2 /* UIViews */,
+				CEEF17BE1DE2611D005D46E2 /* MainTabControllerViewController.swift */,
+				CEEF17BB1DE25A13005D46E2 /* WebTasks */,
 				CEEF17A41DE25564005D46E2 /* AppDelegate.swift */,
-				CEEF17A61DE25564005D46E2 /* ViewController.swift */,
 				CEEF17A81DE25564005D46E2 /* Main.storyboard */,
 				CEEF17AE1DE25564005D46E2 /* Assets.xcassets */,
 				CEEF17B01DE25564005D46E2 /* LaunchScreen.storyboard */,
 				CEEF17B31DE25564005D46E2 /* Info.plist */,
 				CEEF17AB1DE25564005D46E2 /* ACBAReserveMeiOS.xcdatamodeld */,
+				CEEF17D41DE2A103005D46E2 /* Encryption.h */,
 			);
 			path = ACBAReserveMeiOS;
+			sourceTree = "<group>";
+		};
+		CEEF17BB1DE25A13005D46E2 /* WebTasks */ = {
+			isa = PBXGroup;
+			children = (
+				CEEF17A61DE25564005D46E2 /* LoginViewController.swift */,
+			);
+			name = WebTasks;
+			sourceTree = "<group>";
+		};
+		CEEF17C01DE2618F005D46E2 /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				CEEF17C11DE261BD005D46E2 /* MainViewController.swift */,
+			);
+			name = UIViews;
+			sourceTree = "<group>";
+		};
+		CEEF17D01DE26F88005D46E2 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				CEEF17CE1DE26F7F005D46E2 /* PostRequest.swift */,
+			);
+			name = WebService;
+			sourceTree = "<group>";
+		};
+		CEEF17D11DE2932A005D46E2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CEEF17D21DE29349005D46E2 /* String+Encryption.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,6 +155,7 @@
 				CEEF179D1DE25564005D46E2 /* Sources */,
 				CEEF179E1DE25564005D46E2 /* Frameworks */,
 				CEEF179F1DE25564005D46E2 /* Resources */,
+				CEEF17C91DE263D3005D46E2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -138,9 +217,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEEF17A71DE25564005D46E2 /* ViewController.swift in Sources */,
+				CEEF17A71DE25564005D46E2 /* LoginViewController.swift in Sources */,
+				CEEF17D31DE29349005D46E2 /* String+Encryption.swift in Sources */,
+				CEEF17CF1DE26F7F005D46E2 /* PostRequest.swift in Sources */,
+				CEDF90281DE2F0D20070D0A0 /* Store.swift in Sources */,
 				CEEF17A51DE25564005D46E2 /* AppDelegate.swift in Sources */,
 				CEEF17AD1DE25564005D46E2 /* ACBAReserveMeiOS.xcdatamodeld in Sources */,
+				CEEF17BF1DE2611D005D46E2 /* MainTabControllerViewController.swift in Sources */,
+				CEEF17C21DE261BD005D46E2 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +291,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = ACBAReserveMeiOS/Encryption.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -245,6 +330,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = ACBAReserveMeiOS/Encryption.h;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -253,10 +339,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ACBAReserveMeiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = acba.ACBAReserveMeiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ACBAReserveMeiOS/Encryption.h;
 			};
 			name = Debug;
 		};
@@ -264,10 +356,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ACBAReserveMeiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = acba.ACBAReserveMeiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ACBAReserveMeiOS/Encryption.h;
 			};
 			name = Release;
 		};
@@ -290,6 +388,7 @@
 				CEEF17B81DE25564005D46E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
