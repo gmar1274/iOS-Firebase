@@ -9,13 +9,15 @@
 import UIKit
 
 class MainTabControllerViewController: UITabBarController {
-
+	//var store_list:[FirebaseStore]=[]
+	var store:FirebaseStore?
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+		        // Do any additional setup after loading the view.
     }
-
+	public func setCurrentStore(store:FirebaseStore){
+		self.store = store
+	}
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

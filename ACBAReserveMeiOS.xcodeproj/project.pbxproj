@@ -7,7 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A224913DCCA2049CA5456689 /* Pods_ACBAReserveMeiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5BBF55E046020B2B51A83D /* Pods_ACBAReserveMeiOS.framework */; };
+		CE0929281E1BFDC200A5A4DE /* StylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0929271E1BFDC200A5A4DE /* StylistViewController.swift */; };
+		CE09292A1E1C055400A5A4DE /* StylistTodayAppointmentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0929291E1C055400A5A4DE /* StylistTodayAppointmentsTableViewCell.swift */; };
+		CE09292C1E1C101600A5A4DE /* ReservationDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09292B1E1C101600A5A4DE /* ReservationDetailsTableViewCell.swift */; };
+		CE0937D31E11E0EC007E01C1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0937D21E11E0EC007E01C1 /* MapKit.framework */; };
+		CE0D97FD1E204FBA0062BB3F /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D97FC1E204FBA0062BB3F /* UserSettingsViewController.swift */; };
+		CE0F54771E15445600BD11B7 /* TimeSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F54761E15445600BD11B7 /* TimeSet.swift */; };
+		CE109ED91E1F2D1200DF379B /* UpcomingAppointmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE109ED81E1F2D1200DF379B /* UpcomingAppointmentsViewController.swift */; };
+		CE109EDB1E1F35AC00DF379B /* UpcomingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE109EDA1E1F35AC00DF379B /* UpcomingTableViewCell.swift */; };
+		CE109EDD1E1F42B500DF379B /* RedundantTimeSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE109EDC1E1F42B500DF379B /* RedundantTimeSetViewController.swift */; };
+		CE1188731E2349F700A1D716 /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1188721E2349F700A1D716 /* MyAPIClient.swift */; };
+		CE1188751E23548300A1D716 /* ExampleStripeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1188741E23548300A1D716 /* ExampleStripeViewController.swift */; };
+		CE1188771E23560E00A1D716 /* CheckoutRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1188761E23560E00A1D716 /* CheckoutRowView.swift */; };
+		CE1188791E2359CA00A1D716 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1188781E2359CA00A1D716 /* Buttons.swift */; };
+		CE11887B1E235B4500A1D716 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11887A1E235B4500A1D716 /* Settings.swift */; };
+		CE12398B1E1C5DBF00C1ABA7 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12398A1E1C5DBF00C1ABA7 /* CustomTabBarController.swift */; };
+		CE12398D1E1C772300C1ABA7 /* CellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12398C1E1C772300C1ABA7 /* CellViewController.swift */; };
+		CE1AD34C1E1797FB009452DE /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AD34B1E1797FB009452DE /* Reservation.swift */; };
+		CE1AD34E1E17AEC1009452DE /* ReservationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AD34D1E17AEC1009452DE /* ReservationDetails.swift */; };
+		CE1AD3501E17AFDB009452DE /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AD34F1E17AFDB009452DE /* Customer.swift */; };
+		CE1AD3531E17C96B009452DE /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AD3521E17C96B009452DE /* DateExtension.swift */; };
+		CE1C3B641E129EB500CC22D2 /* StripeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C3B631E129EB500CC22D2 /* StripeViewController.swift */; };
+		CE3B05851E0B9F8C00704C79 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B05841E0B9F8C00704C79 /* Service.swift */; };
+		CE3B05871E0BAB1500704C79 /* Stylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B05861E0BAB1500704C79 /* Stylist.swift */; };
+		CE3B05891E0BC39100704C79 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B05881E0BC39100704C79 /* Utils.swift */; };
+		CE3B058B1E0BDA5E00704C79 /* LiveFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B058A1E0BDA5E00704C79 /* LiveFeed.swift */; };
+		CE3E1B8B1E13F12E005D339D /* StylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E1B8A1E13F12E005D339D /* StylistTableViewCell.swift */; };
+		CE3E1B8D1E13F1D9005D339D /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E1B8C1E13F1D9005D339D /* ServiceTableViewCell.swift */; };
+		CE3E1B8F1E1406C2005D339D /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E1B8E1E1406C2005D339D /* ReservationViewController.swift */; };
+		CE78E1521E46B55600E67AD0 /* FirebaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78E1511E46B55600E67AD0 /* FirebaseStore.swift */; };
+		CE78E1541E46B6AB00E67AD0 /* LatLng.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78E1531E46B6AB00E67AD0 /* LatLng.swift */; };
+		CE9A155F1E0A15BB00438E0A /* CustomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A155E1E0A15BB00438E0A /* CustomeTableViewCell.swift */; };
+		CEA4460D1E46986300B4E5BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEA4460C1E46986300B4E5BC /* GoogleService-Info.plist */; };
+		CEB53F8C1E485FB800E697B9 /* FIRDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB53F8B1E485FB800E697B9 /* FIRDataObject.swift */; };
+		CEB53F8E1E496F1000E697B9 /* FirebaseStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB53F8D1E496F1000E697B9 /* FirebaseStylist.swift */; };
+		CECA31F11E11EB4800499514 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECA31F01E11EB4800499514 /* Stripe.framework */; };
+		CED40B431E0E19C1007C2624 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40B421E0E19C1007C2624 /* CreditCardView.swift */; };
 		CEDF90281DE2F0D20070D0A0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF90271DE2F0D20070D0A0 /* Store.swift */; };
+		CEEDBA731E0C313D00DD71A1 /* StylistCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDBA721E0C313D00DD71A1 /* StylistCellView.swift */; };
 		CEEF17A51DE25564005D46E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17A41DE25564005D46E2 /* AppDelegate.swift */; };
 		CEEF17A71DE25564005D46E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17A61DE25564005D46E2 /* LoginViewController.swift */; };
 		CEEF17AA1DE25564005D46E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEF17A81DE25564005D46E2 /* Main.storyboard */; };
@@ -16,10 +54,9 @@
 		CEEF17B21DE25564005D46E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEF17B01DE25564005D46E2 /* LaunchScreen.storyboard */; };
 		CEEF17BF1DE2611D005D46E2 /* MainTabControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17BE1DE2611D005D46E2 /* MainTabControllerViewController.swift */; };
 		CEEF17C21DE261BD005D46E2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17C11DE261BD005D46E2 /* MainViewController.swift */; };
-		CEEF17C71DE263D3005D46E2 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEF17C61DE263D3005D46E2 /* Stripe.framework */; };
-		CEEF17C81DE263D3005D46E2 /* Stripe.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEEF17C61DE263D3005D46E2 /* Stripe.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEEF17CF1DE26F7F005D46E2 /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17CE1DE26F7F005D46E2 /* PostRequest.swift */; };
 		CEEF17D31DE29349005D46E2 /* String+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF17D21DE29349005D46E2 /* String+Encryption.swift */; };
+		CEFD51E71E1641AD00DD665D /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD51E61E1641AD00DD665D /* AppointmentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +66,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CEEF17C81DE263D3005D46E2 /* Stripe.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -37,7 +73,47 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B5BBF55E046020B2B51A83D /* Pods_ACBAReserveMeiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACBAReserveMeiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		576796850A3D34AB9ABE40AC /* Pods-ACBAReserveMeiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACBAReserveMeiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACBAReserveMeiOS/Pods-ACBAReserveMeiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		BF85AC5CFBE92999567CF9C2 /* Pods-ACBAReserveMeiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACBAReserveMeiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACBAReserveMeiOS/Pods-ACBAReserveMeiOS.release.xcconfig"; sourceTree = "<group>"; };
+		CE0929271E1BFDC200A5A4DE /* StylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistViewController.swift; sourceTree = "<group>"; };
+		CE0929291E1C055400A5A4DE /* StylistTodayAppointmentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistTodayAppointmentsTableViewCell.swift; sourceTree = "<group>"; };
+		CE09292B1E1C101600A5A4DE /* ReservationDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		CE0937D21E11E0EC007E01C1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CE0D97FC1E204FBA0062BB3F /* UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
+		CE0F54761E15445600BD11B7 /* TimeSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSet.swift; sourceTree = "<group>"; };
+		CE109ED81E1F2D1200DF379B /* UpcomingAppointmentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingAppointmentsViewController.swift; sourceTree = "<group>"; };
+		CE109EDA1E1F35AC00DF379B /* UpcomingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingTableViewCell.swift; sourceTree = "<group>"; };
+		CE109EDC1E1F42B500DF379B /* RedundantTimeSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedundantTimeSetViewController.swift; sourceTree = "<group>"; };
+		CE1188721E2349F700A1D716 /* MyAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
+		CE1188741E23548300A1D716 /* ExampleStripeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleStripeViewController.swift; sourceTree = "<group>"; };
+		CE1188761E23560E00A1D716 /* CheckoutRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutRowView.swift; sourceTree = "<group>"; };
+		CE1188781E2359CA00A1D716 /* Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		CE11887A1E235B4500A1D716 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		CE12398A1E1C5DBF00C1ABA7 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		CE12398C1E1C772300C1ABA7 /* CellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewController.swift; sourceTree = "<group>"; };
+		CE1AD34B1E1797FB009452DE /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		CE1AD34D1E17AEC1009452DE /* ReservationDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationDetails.swift; sourceTree = "<group>"; };
+		CE1AD34F1E17AFDB009452DE /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		CE1AD3521E17C96B009452DE /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		CE1C3B631E129EB500CC22D2 /* StripeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeViewController.swift; sourceTree = "<group>"; };
+		CE3B05841E0B9F8C00704C79 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		CE3B05861E0BAB1500704C79 /* Stylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylist.swift; sourceTree = "<group>"; };
+		CE3B05881E0BC39100704C79 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		CE3B058A1E0BDA5E00704C79 /* LiveFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveFeed.swift; sourceTree = "<group>"; };
+		CE3E1B8A1E13F12E005D339D /* StylistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistTableViewCell.swift; sourceTree = "<group>"; };
+		CE3E1B8C1E13F1D9005D339D /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
+		CE3E1B8E1E1406C2005D339D /* ReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
+		CE78E1511E46B55600E67AD0 /* FirebaseStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStore.swift; sourceTree = "<group>"; };
+		CE78E1531E46B6AB00E67AD0 /* LatLng.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatLng.swift; sourceTree = "<group>"; };
+		CE9A155E1E0A15BB00438E0A /* CustomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeTableViewCell.swift; sourceTree = "<group>"; };
+		CEA4460C1E46986300B4E5BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CEB53F8B1E485FB800E697B9 /* FIRDataObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRDataObject.swift; sourceTree = "<group>"; };
+		CEB53F8D1E496F1000E697B9 /* FirebaseStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStylist.swift; sourceTree = "<group>"; };
+		CECA31F01E11EB4800499514 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = ../../Desktop/Stripe.framework; sourceTree = "<group>"; };
+		CED40B421E0E19C1007C2624 /* CreditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		CEDF90271DE2F0D20070D0A0 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		CEEDBA721E0C313D00DD71A1 /* StylistCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistCellView.swift; sourceTree = "<group>"; };
 		CEEF17A11DE25564005D46E2 /* ACBAReserveMeiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACBAReserveMeiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEF17A41DE25564005D46E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEF17A61DE25564005D46E2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -46,13 +122,12 @@
 		CEEF17AE1DE25564005D46E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEEF17B11DE25564005D46E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEEF17B31DE25564005D46E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEEF17B91DE2559B005D46E2 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = ../../Desktop/Stripe.framework; sourceTree = "<group>"; };
 		CEEF17BE1DE2611D005D46E2 /* MainTabControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabControllerViewController.swift; path = ../MainTabControllerViewController.swift; sourceTree = "<group>"; };
 		CEEF17C11DE261BD005D46E2 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		CEEF17C61DE263D3005D46E2 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Stripe.framework; sourceTree = "<group>"; };
 		CEEF17CE1DE26F7F005D46E2 /* PostRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
 		CEEF17D21DE29349005D46E2 /* String+Encryption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Encryption.swift"; sourceTree = "<group>"; };
 		CEEF17D41DE2A103005D46E2 /* Encryption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Encryption.h; sourceTree = "<group>"; };
+		CEFD51E61E1641AD00DD665D /* AppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,17 +135,90 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEEF17C71DE263D3005D46E2 /* Stripe.framework in Frameworks */,
+				CECA31F11E11EB4800499514 /* Stripe.framework in Frameworks */,
+				CE0937D31E11E0EC007E01C1 /* MapKit.framework in Frameworks */,
+				A224913DCCA2049CA5456689 /* Pods_ACBAReserveMeiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160BD61D5CABFDD1C9ECF1BB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				576796850A3D34AB9ABE40AC /* Pods-ACBAReserveMeiOS.debug.xcconfig */,
+				BF85AC5CFBE92999567CF9C2 /* Pods-ACBAReserveMeiOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CE0937D11E11E0EC007E01C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CECA31F01E11EB4800499514 /* Stripe.framework */,
+				CE0937D21E11E0EC007E01C1 /* MapKit.framework */,
+				0B5BBF55E046020B2B51A83D /* Pods_ACBAReserveMeiOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE1239891E1C5C4300C1ABA7 /* tabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE12398A1E1C5DBF00C1ABA7 /* CustomTabBarController.swift */,
+			);
+			name = tabBarControllers;
+			sourceTree = "<group>";
+		};
+		CE1AD3511E17C951009452DE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CE1AD3521E17C96B009452DE /* DateExtension.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		CE9A155D1E0A10E700438E0A /* TableViews */ = {
+			isa = PBXGroup;
+			children = (
+				CE9A155E1E0A15BB00438E0A /* CustomeTableViewCell.swift */,
+				CEEDBA721E0C313D00DD71A1 /* StylistCellView.swift */,
+				CE3E1B8A1E13F12E005D339D /* StylistTableViewCell.swift */,
+				CE3E1B8C1E13F1D9005D339D /* ServiceTableViewCell.swift */,
+				CE0929291E1C055400A5A4DE /* StylistTodayAppointmentsTableViewCell.swift */,
+				CE09292B1E1C101600A5A4DE /* ReservationDetailsTableViewCell.swift */,
+				CE109EDA1E1F35AC00DF379B /* UpcomingTableViewCell.swift */,
+			);
+			name = TableViews;
+			sourceTree = "<group>";
+		};
+		CED40B411E0E192D007C2624 /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				CE1188761E23560E00A1D716 /* CheckoutRowView.swift */,
+				CE1188781E2359CA00A1D716 /* Buttons.swift */,
+				CE11887A1E235B4500A1D716 /* Settings.swift */,
+			);
+			name = UIViews;
+			sourceTree = "<group>";
+		};
 		CEDF90261DE2F0A20070D0A0 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
 				CEDF90271DE2F0D20070D0A0 /* Store.swift */,
+				CE3B05841E0B9F8C00704C79 /* Service.swift */,
+				CE3B05861E0BAB1500704C79 /* Stylist.swift */,
+				CE3B05881E0BC39100704C79 /* Utils.swift */,
+				CE0F54761E15445600BD11B7 /* TimeSet.swift */,
+				CE1AD34B1E1797FB009452DE /* Reservation.swift */,
+				CE1AD34D1E17AEC1009452DE /* ReservationDetails.swift */,
+				CE1AD34F1E17AFDB009452DE /* Customer.swift */,
+				CE1188721E2349F700A1D716 /* MyAPIClient.swift */,
+				CE78E1511E46B55600E67AD0 /* FirebaseStore.swift */,
+				CE78E1531E46B6AB00E67AD0 /* LatLng.swift */,
+				CEB53F8B1E485FB800E697B9 /* FIRDataObject.swift */,
+				CEB53F8D1E496F1000E697B9 /* FirebaseStylist.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -78,10 +226,10 @@
 		CEEF17981DE25564005D46E2 = {
 			isa = PBXGroup;
 			children = (
-				CEEF17C61DE263D3005D46E2 /* Stripe.framework */,
-				CEEF17B91DE2559B005D46E2 /* Stripe.framework */,
 				CEEF17A31DE25564005D46E2 /* ACBAReserveMeiOS */,
 				CEEF17A21DE25564005D46E2 /* Products */,
+				CE0937D11E11E0EC007E01C1 /* Frameworks */,
+				160BD61D5CABFDD1C9ECF1BB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,10 +244,15 @@
 		CEEF17A31DE25564005D46E2 /* ACBAReserveMeiOS */ = {
 			isa = PBXGroup;
 			children = (
+				CEA4460C1E46986300B4E5BC /* GoogleService-Info.plist */,
+				CE1239891E1C5C4300C1ABA7 /* tabBarControllers */,
+				CE1AD3511E17C951009452DE /* Extension */,
+				CED40B411E0E192D007C2624 /* UIViews */,
+				CE9A155D1E0A10E700438E0A /* TableViews */,
 				CEDF90261DE2F0A20070D0A0 /* Objects */,
 				CEEF17D11DE2932A005D46E2 /* Utils */,
 				CEEF17D01DE26F88005D46E2 /* WebService */,
-				CEEF17C01DE2618F005D46E2 /* UIViews */,
+				CEEF17C01DE2618F005D46E2 /* UIViewControllers */,
 				CEEF17BE1DE2611D005D46E2 /* MainTabControllerViewController.swift */,
 				CEEF17BB1DE25A13005D46E2 /* WebTasks */,
 				CEEF17A41DE25564005D46E2 /* AppDelegate.swift */,
@@ -121,12 +274,23 @@
 			name = WebTasks;
 			sourceTree = "<group>";
 		};
-		CEEF17C01DE2618F005D46E2 /* UIViews */ = {
+		CEEF17C01DE2618F005D46E2 /* UIViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CED40B421E0E19C1007C2624 /* CreditCardView.swift */,
 				CEEF17C11DE261BD005D46E2 /* MainViewController.swift */,
+				CE3B058A1E0BDA5E00704C79 /* LiveFeed.swift */,
+				CE1C3B631E129EB500CC22D2 /* StripeViewController.swift */,
+				CE3E1B8E1E1406C2005D339D /* ReservationViewController.swift */,
+				CEFD51E61E1641AD00DD665D /* AppointmentViewController.swift */,
+				CE0929271E1BFDC200A5A4DE /* StylistViewController.swift */,
+				CE12398C1E1C772300C1ABA7 /* CellViewController.swift */,
+				CE109ED81E1F2D1200DF379B /* UpcomingAppointmentsViewController.swift */,
+				CE109EDC1E1F42B500DF379B /* RedundantTimeSetViewController.swift */,
+				CE0D97FC1E204FBA0062BB3F /* UserSettingsViewController.swift */,
+				CE1188741E23548300A1D716 /* ExampleStripeViewController.swift */,
 			);
-			name = UIViews;
+			name = UIViewControllers;
 			sourceTree = "<group>";
 		};
 		CEEF17D01DE26F88005D46E2 /* WebService */ = {
@@ -152,10 +316,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEEF17B61DE25564005D46E2 /* Build configuration list for PBXNativeTarget "ACBAReserveMeiOS" */;
 			buildPhases = (
+				D3845ABF3A9D81B12EFAF606 /* [CP] Check Pods Manifest.lock */,
 				CEEF179D1DE25564005D46E2 /* Sources */,
 				CEEF179E1DE25564005D46E2 /* Frameworks */,
 				CEEF179F1DE25564005D46E2 /* Resources */,
 				CEEF17C91DE263D3005D46E2 /* Embed Frameworks */,
+				130672CF3C8AB096B4CC2BFB /* [CP] Embed Pods Frameworks */,
+				23345518AA769FC1DB6588B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -173,11 +340,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = user;
 				TargetAttributes = {
 					CEEF17A01DE25564005D46E2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = R58F22QGF4;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -205,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEF17B21DE25564005D46E2 /* LaunchScreen.storyboard in Resources */,
+				CEA4460D1E46986300B4E5BC /* GoogleService-Info.plist in Resources */,
 				CEEF17AF1DE25564005D46E2 /* Assets.xcassets in Resources */,
 				CEEF17AA1DE25564005D46E2 /* Main.storyboard in Resources */,
 			);
@@ -212,19 +388,102 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		130672CF3C8AB096B4CC2BFB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACBAReserveMeiOS/Pods-ACBAReserveMeiOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		23345518AA769FC1DB6588B4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACBAReserveMeiOS/Pods-ACBAReserveMeiOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3845ABF3A9D81B12EFAF606 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CEEF179D1DE25564005D46E2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE12398D1E1C772300C1ABA7 /* CellViewController.swift in Sources */,
+				CE1188771E23560E00A1D716 /* CheckoutRowView.swift in Sources */,
+				CEFD51E71E1641AD00DD665D /* AppointmentViewController.swift in Sources */,
+				CE3B058B1E0BDA5E00704C79 /* LiveFeed.swift in Sources */,
+				CE9A155F1E0A15BB00438E0A /* CustomeTableViewCell.swift in Sources */,
+				CE0D97FD1E204FBA0062BB3F /* UserSettingsViewController.swift in Sources */,
+				CE1AD3501E17AFDB009452DE /* Customer.swift in Sources */,
+				CE1AD34E1E17AEC1009452DE /* ReservationDetails.swift in Sources */,
+				CE0F54771E15445600BD11B7 /* TimeSet.swift in Sources */,
 				CEEF17A71DE25564005D46E2 /* LoginViewController.swift in Sources */,
+				CEB53F8C1E485FB800E697B9 /* FIRDataObject.swift in Sources */,
+				CE09292A1E1C055400A5A4DE /* StylistTodayAppointmentsTableViewCell.swift in Sources */,
 				CEEF17D31DE29349005D46E2 /* String+Encryption.swift in Sources */,
 				CEEF17CF1DE26F7F005D46E2 /* PostRequest.swift in Sources */,
+				CE3E1B8F1E1406C2005D339D /* ReservationViewController.swift in Sources */,
 				CEDF90281DE2F0D20070D0A0 /* Store.swift in Sources */,
+				CE11887B1E235B4500A1D716 /* Settings.swift in Sources */,
+				CE1AD3531E17C96B009452DE /* DateExtension.swift in Sources */,
+				CE3B05851E0B9F8C00704C79 /* Service.swift in Sources */,
+				CE3E1B8D1E13F1D9005D339D /* ServiceTableViewCell.swift in Sources */,
+				CE1188731E2349F700A1D716 /* MyAPIClient.swift in Sources */,
+				CE109EDD1E1F42B500DF379B /* RedundantTimeSetViewController.swift in Sources */,
+				CE3B05871E0BAB1500704C79 /* Stylist.swift in Sources */,
+				CED40B431E0E19C1007C2624 /* CreditCardView.swift in Sources */,
 				CEEF17A51DE25564005D46E2 /* AppDelegate.swift in Sources */,
+				CE1AD34C1E1797FB009452DE /* Reservation.swift in Sources */,
+				CE09292C1E1C101600A5A4DE /* ReservationDetailsTableViewCell.swift in Sources */,
 				CEEF17AD1DE25564005D46E2 /* ACBAReserveMeiOS.xcdatamodeld in Sources */,
+				CE1C3B641E129EB500CC22D2 /* StripeViewController.swift in Sources */,
 				CEEF17BF1DE2611D005D46E2 /* MainTabControllerViewController.swift in Sources */,
+				CEEDBA731E0C313D00DD71A1 /* StylistCellView.swift in Sources */,
 				CEEF17C21DE261BD005D46E2 /* MainViewController.swift in Sources */,
+				CE12398B1E1C5DBF00C1ABA7 /* CustomTabBarController.swift in Sources */,
+				CE1188751E23548300A1D716 /* ExampleStripeViewController.swift in Sources */,
+				CE109EDB1E1F35AC00DF379B /* UpcomingTableViewCell.swift in Sources */,
+				CE3E1B8B1E13F12E005D339D /* StylistTableViewCell.swift in Sources */,
+				CE3B05891E0BC39100704C79 /* Utils.swift in Sources */,
+				CE78E1521E46B55600E67AD0 /* FirebaseStore.swift in Sources */,
+				CE78E1541E46B6AB00E67AD0 /* LatLng.swift in Sources */,
+				CEB53F8E1E496F1000E697B9 /* FirebaseStylist.swift in Sources */,
+				CE1188791E2359CA00A1D716 /* Buttons.swift in Sources */,
+				CE109ED91E1F2D1200DF379B /* UpcomingAppointmentsViewController.swift in Sources */,
+				CE0929281E1BFDC200A5A4DE /* StylistViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,8 +523,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -310,8 +571,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -331,41 +594,52 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = ACBAReserveMeiOS/Encryption.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		CEEF17B71DE25564005D46E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 576796850A3D34AB9ABE40AC /* Pods-ACBAReserveMeiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = R58F22QGF4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ACBAReserveMeiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = acba.ACBAReserveMeiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ACBAReserveMeiOS/Encryption.h;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		CEEF17B81DE25564005D46E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF85AC5CFBE92999567CF9C2 /* Pods-ACBAReserveMeiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = R58F22QGF4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ACBAReserveMeiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = acba.ACBAReserveMeiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ACBAReserveMeiOS/Encryption.h;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
