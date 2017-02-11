@@ -117,6 +117,9 @@ class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManage
 					}
 					let sn = (ds as! FIRDataSnapshot).childSnapshot(forPath:"store_number").value as! CLong
 					store.store_number = sn
+					let tp = (ds as! FIRDataSnapshot).childSnapshot(forPath:"ticket_price").value as! CDouble
+					store.ticket_price = tp
+					
 				}
 				
 				

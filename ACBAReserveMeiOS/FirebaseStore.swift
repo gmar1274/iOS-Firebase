@@ -30,7 +30,7 @@ class FirebaseStore : FIRDataObject, MKAnnotation{
 	var store_number:CLong?
 	var subscription_id:String?
 	var ticket_price:CDouble?
-	
+	var current_ticket:CLong = 0
 	 /*init() {
 		super.init(snapshot: snap)
 		self.address=""

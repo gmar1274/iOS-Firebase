@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
 # Uncomment this line to define a global platform for your project ACBAReserveMeiOS
 # platform :ios, '9.0'
 
@@ -11,4 +13,7 @@ pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'Stripe'
+pod 'Firebase/AdMob'
+pod 'Google-Mobile-Ads-SDK'
+
 end

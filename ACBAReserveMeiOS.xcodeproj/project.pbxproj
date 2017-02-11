@@ -29,6 +29,8 @@
 		CE1AD3501E17AFDB009452DE /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AD34F1E17AFDB009452DE /* Customer.swift */; };
 		CE1AD3531E17C96B009452DE /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AD3521E17C96B009452DE /* DateExtension.swift */; };
 		CE1C3B641E129EB500CC22D2 /* StripeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C3B631E129EB500CC22D2 /* StripeViewController.swift */; };
+		CE33D2F71E4B02A3001C6A8C /* POSTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33D2F61E4B02A3001C6A8C /* POSTAPIClient.swift */; };
+		CE33D2F91E4B440D001C6A8C /* FirebaseTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33D2F81E4B440D001C6A8C /* FirebaseTicket.swift */; };
 		CE3B05851E0B9F8C00704C79 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B05841E0B9F8C00704C79 /* Service.swift */; };
 		CE3B05871E0BAB1500704C79 /* Stylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B05861E0BAB1500704C79 /* Stylist.swift */; };
 		CE3B05891E0BC39100704C79 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B05881E0BC39100704C79 /* Utils.swift */; };
@@ -36,13 +38,17 @@
 		CE3E1B8B1E13F12E005D339D /* StylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E1B8A1E13F12E005D339D /* StylistTableViewCell.swift */; };
 		CE3E1B8D1E13F1D9005D339D /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E1B8C1E13F1D9005D339D /* ServiceTableViewCell.swift */; };
 		CE3E1B8F1E1406C2005D339D /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E1B8E1E1406C2005D339D /* ReservationViewController.swift */; };
+		CE506FEB1E4EFFA70049CF1B /* FirebaseEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE506FEA1E4EFFA70049CF1B /* FirebaseEmployee.swift */; };
+		CE506FED1E4F21F30049CF1B /* EmployeeCurrentTicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE506FEC1E4F21F20049CF1B /* EmployeeCurrentTicketsViewController.swift */; };
+		CE506FEF1E4F27240049CF1B /* CurrentTicketsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE506FEE1E4F27240049CF1B /* CurrentTicketsTableViewCell.swift */; };
+		CE506FF11E4F431F0049CF1B /* PastTicketHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE506FF01E4F431F0049CF1B /* PastTicketHistoryTableViewCell.swift */; };
+		CE506FF31E4F43E10049CF1B /* PastTicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE506FF21E4F43E10049CF1B /* PastTicketsViewController.swift */; };
 		CE78E1521E46B55600E67AD0 /* FirebaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78E1511E46B55600E67AD0 /* FirebaseStore.swift */; };
 		CE78E1541E46B6AB00E67AD0 /* LatLng.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78E1531E46B6AB00E67AD0 /* LatLng.swift */; };
 		CE9A155F1E0A15BB00438E0A /* CustomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A155E1E0A15BB00438E0A /* CustomeTableViewCell.swift */; };
-		CEA4460D1E46986300B4E5BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEA4460C1E46986300B4E5BC /* GoogleService-Info.plist */; };
 		CEB53F8C1E485FB800E697B9 /* FIRDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB53F8B1E485FB800E697B9 /* FIRDataObject.swift */; };
 		CEB53F8E1E496F1000E697B9 /* FirebaseStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB53F8D1E496F1000E697B9 /* FirebaseStylist.swift */; };
-		CECA31F11E11EB4800499514 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECA31F01E11EB4800499514 /* Stripe.framework */; };
+		CED3D83A1E4E9AAC006AD09E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED3D8391E4E9AAC006AD09E /* GoogleService-Info.plist */; };
 		CED40B431E0E19C1007C2624 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40B421E0E19C1007C2624 /* CreditCardView.swift */; };
 		CEDF90281DE2F0D20070D0A0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF90271DE2F0D20070D0A0 /* Store.swift */; };
 		CEEDBA731E0C313D00DD71A1 /* StylistCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDBA721E0C313D00DD71A1 /* StylistCellView.swift */; };
@@ -76,6 +82,7 @@
 		0B5BBF55E046020B2B51A83D /* Pods_ACBAReserveMeiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACBAReserveMeiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		576796850A3D34AB9ABE40AC /* Pods-ACBAReserveMeiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACBAReserveMeiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACBAReserveMeiOS/Pods-ACBAReserveMeiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BF85AC5CFBE92999567CF9C2 /* Pods-ACBAReserveMeiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACBAReserveMeiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACBAReserveMeiOS/Pods-ACBAReserveMeiOS.release.xcconfig"; sourceTree = "<group>"; };
+		CE02DD801E4E9D17008532FD /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		CE0929271E1BFDC200A5A4DE /* StylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistViewController.swift; sourceTree = "<group>"; };
 		CE0929291E1C055400A5A4DE /* StylistTodayAppointmentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistTodayAppointmentsTableViewCell.swift; sourceTree = "<group>"; };
 		CE09292B1E1C101600A5A4DE /* ReservationDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationDetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -97,6 +104,8 @@
 		CE1AD34F1E17AFDB009452DE /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		CE1AD3521E17C96B009452DE /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		CE1C3B631E129EB500CC22D2 /* StripeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeViewController.swift; sourceTree = "<group>"; };
+		CE33D2F61E4B02A3001C6A8C /* POSTAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSTAPIClient.swift; sourceTree = "<group>"; };
+		CE33D2F81E4B440D001C6A8C /* FirebaseTicket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTicket.swift; sourceTree = "<group>"; };
 		CE3B05841E0B9F8C00704C79 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		CE3B05861E0BAB1500704C79 /* Stylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylist.swift; sourceTree = "<group>"; };
 		CE3B05881E0BC39100704C79 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -104,13 +113,18 @@
 		CE3E1B8A1E13F12E005D339D /* StylistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistTableViewCell.swift; sourceTree = "<group>"; };
 		CE3E1B8C1E13F1D9005D339D /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		CE3E1B8E1E1406C2005D339D /* ReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
+		CE506FEA1E4EFFA70049CF1B /* FirebaseEmployee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseEmployee.swift; sourceTree = "<group>"; };
+		CE506FEC1E4F21F20049CF1B /* EmployeeCurrentTicketsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeCurrentTicketsViewController.swift; sourceTree = "<group>"; };
+		CE506FEE1E4F27240049CF1B /* CurrentTicketsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentTicketsTableViewCell.swift; sourceTree = "<group>"; };
+		CE506FF01E4F431F0049CF1B /* PastTicketHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastTicketHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		CE506FF21E4F43E10049CF1B /* PastTicketsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastTicketsViewController.swift; sourceTree = "<group>"; };
 		CE78E1511E46B55600E67AD0 /* FirebaseStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStore.swift; sourceTree = "<group>"; };
 		CE78E1531E46B6AB00E67AD0 /* LatLng.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatLng.swift; sourceTree = "<group>"; };
 		CE9A155E1E0A15BB00438E0A /* CustomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeTableViewCell.swift; sourceTree = "<group>"; };
-		CEA4460C1E46986300B4E5BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEB53F8B1E485FB800E697B9 /* FIRDataObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRDataObject.swift; sourceTree = "<group>"; };
 		CEB53F8D1E496F1000E697B9 /* FirebaseStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStylist.swift; sourceTree = "<group>"; };
 		CECA31F01E11EB4800499514 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stripe.framework; path = ../../Desktop/Stripe.framework; sourceTree = "<group>"; };
+		CED3D8391E4E9AAC006AD09E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CED40B421E0E19C1007C2624 /* CreditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		CEDF90271DE2F0D20070D0A0 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		CEEDBA721E0C313D00DD71A1 /* StylistCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylistCellView.swift; sourceTree = "<group>"; };
@@ -135,7 +149,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CECA31F11E11EB4800499514 /* Stripe.framework in Frameworks */,
 				CE0937D31E11E0EC007E01C1 /* MapKit.framework in Frameworks */,
 				A224913DCCA2049CA5456689 /* Pods_ACBAReserveMeiOS.framework in Frameworks */,
 			);
@@ -156,6 +169,7 @@
 		CE0937D11E11E0EC007E01C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE02DD801E4E9D17008532FD /* GoogleMobileAds.framework */,
 				CECA31F01E11EB4800499514 /* Stripe.framework */,
 				CE0937D21E11E0EC007E01C1 /* MapKit.framework */,
 				0B5BBF55E046020B2B51A83D /* Pods_ACBAReserveMeiOS.framework */,
@@ -167,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				CE12398A1E1C5DBF00C1ABA7 /* CustomTabBarController.swift */,
+				CEEF17BE1DE2611D005D46E2 /* MainTabControllerViewController.swift */,
 			);
 			name = tabBarControllers;
 			sourceTree = "<group>";
@@ -189,6 +204,8 @@
 				CE0929291E1C055400A5A4DE /* StylistTodayAppointmentsTableViewCell.swift */,
 				CE09292B1E1C101600A5A4DE /* ReservationDetailsTableViewCell.swift */,
 				CE109EDA1E1F35AC00DF379B /* UpcomingTableViewCell.swift */,
+				CE506FEE1E4F27240049CF1B /* CurrentTicketsTableViewCell.swift */,
+				CE506FF01E4F431F0049CF1B /* PastTicketHistoryTableViewCell.swift */,
 			);
 			name = TableViews;
 			sourceTree = "<group>";
@@ -219,6 +236,8 @@
 				CE78E1531E46B6AB00E67AD0 /* LatLng.swift */,
 				CEB53F8B1E485FB800E697B9 /* FIRDataObject.swift */,
 				CEB53F8D1E496F1000E697B9 /* FirebaseStylist.swift */,
+				CE33D2F81E4B440D001C6A8C /* FirebaseTicket.swift */,
+				CE506FEA1E4EFFA70049CF1B /* FirebaseEmployee.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -244,7 +263,7 @@
 		CEEF17A31DE25564005D46E2 /* ACBAReserveMeiOS */ = {
 			isa = PBXGroup;
 			children = (
-				CEA4460C1E46986300B4E5BC /* GoogleService-Info.plist */,
+				CED3D8391E4E9AAC006AD09E /* GoogleService-Info.plist */,
 				CE1239891E1C5C4300C1ABA7 /* tabBarControllers */,
 				CE1AD3511E17C951009452DE /* Extension */,
 				CED40B411E0E192D007C2624 /* UIViews */,
@@ -253,7 +272,6 @@
 				CEEF17D11DE2932A005D46E2 /* Utils */,
 				CEEF17D01DE26F88005D46E2 /* WebService */,
 				CEEF17C01DE2618F005D46E2 /* UIViewControllers */,
-				CEEF17BE1DE2611D005D46E2 /* MainTabControllerViewController.swift */,
 				CEEF17BB1DE25A13005D46E2 /* WebTasks */,
 				CEEF17A41DE25564005D46E2 /* AppDelegate.swift */,
 				CEEF17A81DE25564005D46E2 /* Main.storyboard */,
@@ -289,6 +307,8 @@
 				CE109EDC1E1F42B500DF379B /* RedundantTimeSetViewController.swift */,
 				CE0D97FC1E204FBA0062BB3F /* UserSettingsViewController.swift */,
 				CE1188741E23548300A1D716 /* ExampleStripeViewController.swift */,
+				CE506FEC1E4F21F20049CF1B /* EmployeeCurrentTicketsViewController.swift */,
+				CE506FF21E4F43E10049CF1B /* PastTicketsViewController.swift */,
 			);
 			name = UIViewControllers;
 			sourceTree = "<group>";
@@ -297,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				CEEF17CE1DE26F7F005D46E2 /* PostRequest.swift */,
+				CE33D2F61E4B02A3001C6A8C /* POSTAPIClient.swift */,
 			);
 			name = WebService;
 			sourceTree = "<group>";
@@ -380,7 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEF17B21DE25564005D46E2 /* LaunchScreen.storyboard in Resources */,
-				CEA4460D1E46986300B4E5BC /* GoogleService-Info.plist in Resources */,
+				CED3D83A1E4E9AAC006AD09E /* GoogleService-Info.plist in Resources */,
 				CEEF17AF1DE25564005D46E2 /* Assets.xcassets in Resources */,
 				CEEF17AA1DE25564005D46E2 /* Main.storyboard in Resources */,
 			);
@@ -449,6 +470,7 @@
 				CE0D97FD1E204FBA0062BB3F /* UserSettingsViewController.swift in Sources */,
 				CE1AD3501E17AFDB009452DE /* Customer.swift in Sources */,
 				CE1AD34E1E17AEC1009452DE /* ReservationDetails.swift in Sources */,
+				CE506FF11E4F431F0049CF1B /* PastTicketHistoryTableViewCell.swift in Sources */,
 				CE0F54771E15445600BD11B7 /* TimeSet.swift in Sources */,
 				CEEF17A71DE25564005D46E2 /* LoginViewController.swift in Sources */,
 				CEB53F8C1E485FB800E697B9 /* FIRDataObject.swift in Sources */,
@@ -463,12 +485,16 @@
 				CE3E1B8D1E13F1D9005D339D /* ServiceTableViewCell.swift in Sources */,
 				CE1188731E2349F700A1D716 /* MyAPIClient.swift in Sources */,
 				CE109EDD1E1F42B500DF379B /* RedundantTimeSetViewController.swift in Sources */,
+				CE33D2F91E4B440D001C6A8C /* FirebaseTicket.swift in Sources */,
 				CE3B05871E0BAB1500704C79 /* Stylist.swift in Sources */,
 				CED40B431E0E19C1007C2624 /* CreditCardView.swift in Sources */,
 				CEEF17A51DE25564005D46E2 /* AppDelegate.swift in Sources */,
 				CE1AD34C1E1797FB009452DE /* Reservation.swift in Sources */,
+				CE506FEF1E4F27240049CF1B /* CurrentTicketsTableViewCell.swift in Sources */,
 				CE09292C1E1C101600A5A4DE /* ReservationDetailsTableViewCell.swift in Sources */,
+				CE506FED1E4F21F30049CF1B /* EmployeeCurrentTicketsViewController.swift in Sources */,
 				CEEF17AD1DE25564005D46E2 /* ACBAReserveMeiOS.xcdatamodeld in Sources */,
+				CE506FF31E4F43E10049CF1B /* PastTicketsViewController.swift in Sources */,
 				CE1C3B641E129EB500CC22D2 /* StripeViewController.swift in Sources */,
 				CEEF17BF1DE2611D005D46E2 /* MainTabControllerViewController.swift in Sources */,
 				CEEDBA731E0C313D00DD71A1 /* StylistCellView.swift in Sources */,
@@ -476,12 +502,14 @@
 				CE12398B1E1C5DBF00C1ABA7 /* CustomTabBarController.swift in Sources */,
 				CE1188751E23548300A1D716 /* ExampleStripeViewController.swift in Sources */,
 				CE109EDB1E1F35AC00DF379B /* UpcomingTableViewCell.swift in Sources */,
+				CE506FEB1E4EFFA70049CF1B /* FirebaseEmployee.swift in Sources */,
 				CE3E1B8B1E13F12E005D339D /* StylistTableViewCell.swift in Sources */,
 				CE3B05891E0BC39100704C79 /* Utils.swift in Sources */,
 				CE78E1521E46B55600E67AD0 /* FirebaseStore.swift in Sources */,
 				CE78E1541E46B6AB00E67AD0 /* LatLng.swift in Sources */,
 				CEB53F8E1E496F1000E697B9 /* FirebaseStylist.swift in Sources */,
 				CE1188791E2359CA00A1D716 /* Buttons.swift in Sources */,
+				CE33D2F71E4B02A3001C6A8C /* POSTAPIClient.swift in Sources */,
 				CE109ED91E1F2D1200DF379B /* UpcomingAppointmentsViewController.swift in Sources */,
 				CE0929281E1BFDC200A5A4DE /* StylistViewController.swift in Sources */,
 			);
@@ -613,7 +641,7 @@
 				INFOPLIST_FILE = ACBAReserveMeiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = acba.ACBAReserveMeiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acba.ACBAReserveMeiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ACBAReserveMeiOS/Encryption.h;
 				SWIFT_VERSION = 3.0;
@@ -635,7 +663,7 @@
 				INFOPLIST_FILE = ACBAReserveMeiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = acba.ACBAReserveMeiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acba.ACBAReserveMeiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ACBAReserveMeiOS/Encryption.h;
 				SWIFT_VERSION = 3.0;

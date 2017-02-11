@@ -12,7 +12,7 @@ import Stripe
 This class will represent the View of making a creditCard transaction
 */
 
-class CreditCardView: UIViewController, STPPaymentContextDelegate  {
+class CreditCardView: UIViewController, STPPaymentContextDelegate {
 	
 	
 	@IBOutlet var header: UILabel!
@@ -44,10 +44,7 @@ class CreditCardView: UIViewController, STPPaymentContextDelegate  {
 	//////
 	var paymentContext:STPPaymentContext
 	var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-	
-	
-	
-	
+
 	
 	@IBAction func CANCEL(_ sender: AnyObject) {
 		
@@ -56,8 +53,7 @@ class CreditCardView: UIViewController, STPPaymentContextDelegate  {
 	}
 	
 	@IBAction func RESERVE(_ sender: AnyObject) {
-		
-		self.paymentContext.requestPayment()
+			self.paymentContext.requestPayment()
 	}
 	
 	
@@ -94,9 +90,14 @@ required init(coder aDecoder: NSCoder) {
 	
 }
 	
+	@IBOutlet var reserve_btn: UIButton!
 	override func viewDidLoad() {
 		self.paymentContext = STPPaymentContext(apiAdapter: MyAPIClient())		
 		super.viewDidLoad()
+		
+		
+		
+		
 		self.header.text = "Shop: \(self.store!.name!.uppercased())"
 		self.details.text = "Stylist: \(self.stylist!.name!.uppercased())"
 		self.paymentContext.delegate = self
@@ -194,5 +195,5 @@ required init(coder aDecoder: NSCoder) {
 	}
 	func showReceipt(){
 		
-	}
+}
 }

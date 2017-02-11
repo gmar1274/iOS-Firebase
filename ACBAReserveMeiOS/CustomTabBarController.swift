@@ -10,8 +10,11 @@ import UIKit
 
 class CustomTabBarController: UITabBarController {
 
+	var employee:FirebaseEmployee?
+	
     override func viewDidLoad() {
         super.viewDidLoad()
+		print("Firebase in CustomTab...: \(employee?.store_number)")
 
         // Do any additional setup after loading the view.
     }

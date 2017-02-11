@@ -7,19 +7,29 @@
 //
 
 import UIKit
-
+import Firebase
 class UserSettingsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var nameLabel: UILabel!
+	
+	//var user_data:NSData?
 	//var imagePicker = UIImagePickerController()
     override func viewDidLoad() {
         super.viewDidLoad()
-		
-		if(StylistViewController.stylist != nil){
-		self.imageView.image = UIImage(data:(StylistViewController.stylist?.imageArray)!)
-		self.nameLabel.text = StylistViewController.stylist?.name.uppercased()
-		}
+		let ct = self.tabBarController as! CustomTabBarController
+		let emp:FirebaseEmployee = ct.employee!
+		let ref = FIRStorage.storage().reference().child("\(emp.store_phone!)/images/stylists/\(emp.id!)")
+		ref.data(withMaxSize: 10*1024*1024, completion: { data, error in//10 mb
+			if let error = error{
+				print("file error download exit...err: \(error)")
+				
+			}else{
+				print("image success...")
+				self.imageView.image = UIImage(data: data!)
+			}
+		})//end statement
+		self.nameLabel.text = emp.name!.uppercased()
 		
         // Do any additional setup after loading the view.
     }

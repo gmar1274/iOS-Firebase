@@ -18,8 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		STPPaymentConfiguration.shared().publishableKey = "pk_test_txeeWRDZ5WJKfYiMa9ItQT9I"
-		STPPaymentConfiguration.shared().appleMerchantIdentifier = "apple mervhat ID"		// do any other necessary launch configuration
+		//STPPaymentConfiguration.shared().appleMerchantIdentifier = "apple mervhat ID"		// do any other necessary launch configuration
 		FIRApp.configure()
+		GADMobileAds.configure(withApplicationID: "ca-app-pub-9309556355508377~2611344846")		
 		// Override point for customization after application launch.
 		return true
 	}

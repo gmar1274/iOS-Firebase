@@ -1,4 +1,7 @@
 PODS:
+  - Firebase/AdMob (3.4.0):
+    - Firebase/Analytics
+    - Google-Mobile-Ads-SDK (= 7.9.1)
   - Firebase/Analytics (3.4.0):
     - FirebaseAnalytics (~> 3.3)
   - Firebase/Auth (3.4.0):
@@ -28,6 +31,7 @@ PODS:
   - FirebaseStorage (1.0.2):
     - FirebaseAnalytics (~> 3.2)
     - GoogleNetworkingUtilities (~> 1.2)
+  - Google-Mobile-Ads-SDK (7.9.1)
   - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleNetworkingUtilities (1.2.1):
@@ -41,10 +45,12 @@ PODS:
   - Stripe (8.0.4)
 
 DEPENDENCIES:
+  - Firebase/AdMob
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - Google-Mobile-Ads-SDK
   - Stripe
 
 SPEC CHECKSUMS:
@@ -54,6 +60,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 59bea2e7dfd81b3b8b2f8e396caf1a52c2ced6f7
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FirebaseStorage: fa2a87dee81f682f553af6839daa37a750e65f6a
+  Google-Mobile-Ads-SDK: 575583d7eae25793bb81ad8673737d1b4ecbedc5
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
   GoogleNetworkingUtilities: 3e83269048cfb498dc7ec83ab36813360965c74f
   GoogleParsingUtilities: 30b3896f9ee167dc78747f013d3de157ced1cadf
@@ -61,6 +68,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   Stripe: c3e325e0309dcdcb478191dbd298082823a210c1
 
-PODFILE CHECKSUM: 7a342b8b748735ea1f090cc5e3b88675a4ff24c6
+PODFILE CHECKSUM: 941f571e8ccbcea55e4d44741dbb2546053072d0
 
 COCOAPODS: 1.2.0

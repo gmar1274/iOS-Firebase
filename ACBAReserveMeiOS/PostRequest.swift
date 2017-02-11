@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreLocation
-class PostRequest{
+class PostRequest {
 	static let loginURL:String="http://www.acbasoftware.com/pos/login.php?"
 	static let stylistURL:String="http://www.acbasoftware.com/pos/stylist.php?"
 	static let upload_imageURL:String="http://www.acbasoftware.com/pos/upload_image.php?"
@@ -21,6 +21,12 @@ class PostRequest{
 	static func createCharge(token:String){
 		
 	}
+	//////////////api protocol
+	
+	
+	
+	
+	
 	
 	
 	

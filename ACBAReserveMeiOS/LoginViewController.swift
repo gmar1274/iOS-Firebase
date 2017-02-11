@@ -8,6 +8,7 @@
 import CoreLocation
 import UIKit
 import Firebase
+import GoogleMobileAds
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -33,8 +34,9 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class LoginViewController: UIViewController, CLLocationManagerDelegate {
+class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBannerViewDelegate,GADInterstitialDelegate {
 	
+	var TEST = true
 	
 	@IBOutlet var username: UITextField!
 	
@@ -53,9 +55,88 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
 			return
 		}else{
 			let username = u?.replacingOccurrences(of: " ", with: "")
-			PostRequest.login_request(self, user:username!, pass:p!)
-		}
+			var alert = UIAlertController(title: "Authenticating", message: "Please wait...", preferredStyle: .alert)
+			
+			alert.view.tintColor = UIColor.black
+			
+			let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
+			loadingIndicator.hidesWhenStopped = true
+			loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+			loadingIndicator.startAnimating();
+			
+			alert.view.addSubview(loadingIndicator)
+			present(alert, animated: true, completion: nil)//display Alert
+			FIRAuth.auth()?.signInAnonymously(completion:{
+				(user,error) in
+				if(error==nil){//PostRequest.login_request(self, user:username!, pass:p!)
+					
+					self.firebaseQueryStylist(username: username!, pass: p!, alert:alert)
+					
+				}else{//error cant login probably network off
+					
+			}
+			})//end sign anon
+			
+		}//end else
 	}
+	
+	func firebaseQueryStylist(username:String, pass:String, alert:UIAlertController){
+		let password = pass.sha1()//encrypted pass
+		var user:FirebaseEmployee?
+		let ref = FIRDatabase.database().reference().child("employees")
+		ref.queryOrderedByKey().observeSingleEvent(of: FIRDataEventType.value, with: {(snapshot) in
+			for ds in snapshot.children{
+				let emp = FirebaseEmployee(snapshot: ds as! FIRDataSnapshot)
+				if emp.app_username == username && password == emp.app_password{
+					user = emp
+					break
+				}
+			}
+			alert.dismiss(animated: false, completion: nil)
+			if user == nil{
+				self.error(msg: "Username or password is invalid...")
+			}else{
+				self.goToEmployeeActivity(user: user!)
+			}
+			
+			/*let arr = snapshot.value as? [[String:AnyObject]]
+			if (arr?.count)! > 0{
+			
+			}else{
+				alert.dismiss(animated: true, completion: nil)
+				self.error(msg: "Username or password is invalid.")
+			}*/
+		})
+		/*var arr:[[String: AnyObject]] = []
+		var dict:[String:AnyObject] = [:]
+		dict["name"] = "Gabriel Martinez" as AnyObject?
+		dict["id"] = "1212"as AnyObject?
+		dict["app_password"] = "12345".sha1() as AnyObject?
+		dict["app_username"] = "gmar1274" as AnyObject?
+		dict["store_number"] = "41" as AnyObject?
+		dict["store_phone"] = "9091234567" as AnyObject?
+		arr.append(dict)
+		var dictt:[String:AnyObject] = [:]
+		dictt["name"] = "Daniel Martinez" as AnyObject?
+		dictt["id"] = "1234"as AnyObject?
+		dictt["app_password"] = "12345".sha1() as AnyObject?
+		dictt["app_username"] = "dmar1274" as AnyObject?
+		dictt["store_number"] = "41" as AnyObject?
+		dictt["store_phone"] = "9091234567" as AnyObject?
+		arr.append(dictt)
+		
+		ref.setValue(arr)*/
+		
+	}
+	func goToEmployeeActivity(user:FirebaseEmployee){
+		let vc = self.storyboard?.instantiateViewController(withIdentifier: "stylist_tbc") as! CustomTabBarController
+		vc.employee = user
+		vc.selectedIndex = 0
+		self.present(vc, animated: true, completion: nil)
+		
+	}
+	
+	
 	 func loginSuccess(){
 		//load user credentials
 		//then go to
@@ -78,6 +159,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
 		self.present(alertController, animated: true, completion:nil)
 	
 	}
+	
+	
+	@IBOutlet var adBannerView: GADBannerView!
 	func error(msg:String){
 		
 		let alertController = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
@@ -86,6 +170,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
 		self.present(alertController, animated: true, completion:nil)
 		
 	}
+	var interstitial:GADInterstitial!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -97,6 +183,29 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
 		LoginViewController.locationManager!.startUpdatingLocation()
 		
 		
+		//adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+		/** for banner
+		App ID: ca-app-pub-9309556355508377~2611344846
+		Ad unit ID: ca-app-pub-9309556355508377/2192542441
+		*/
+		interstitial = self.createAndLoadInterstitial()
+		self.adBannerView.isHidden = true
+		self.adBannerView.delegate = self
+		self.adBannerView.adSize = kGADAdSizeSmartBannerPortrait
+		adBannerView.adUnitID = "ca-app-pub-9309556355508377/2192542441"
+		adBannerView.rootViewController = self
+		var request:GADRequest = GADRequest()
+		if TEST{
+		request.testDevices = ["2077ef9a63d2b398840261c8221a0c9b"]
+		}
+		adBannerView.load(request)
+		
+	}
+	func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
+		self.adBannerView.isHidden = false
+	}
+	func adView(_ bannerView: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
+		self.adBannerView.isHidden = true
 	}
 	func locationManager(_ manager:CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
 		if status == .authorizedWhenInUse{
@@ -117,7 +226,29 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
 	
 	}
 	func goToMainActivity(){
+		if self.interstitial.isReady{
+			self.interstitial.present(fromRootViewController: self)
+		}
+	}
+	
+	func createAndLoadInterstitial() -> GADInterstitial {
+		//for video
+		//app ID: ca-app-pub-3940256099942544/2934735716
+		//Ad unit ID: ca-app-pub-9309556355508377/4088078044
+         var interstitial = GADInterstitial(adUnitID: "ca-app-pub-9309556355508377/4088078044")
+         interstitial.delegate = self
+		var request = GADRequest()
+		
+		if TEST{
+			request.testDevices = ["2077ef9a63d2b398840261c8221a0c9b"]
+		}
+		interstitial.load(request)
+		return interstitial
+	}
+	
+	func interstitialDidDismissScreen(_ ad: GADInterstitial) {
 		performSegue(withIdentifier: "guest", sender:self)
+		interstitial = createAndLoadInterstitial()
 	}
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()

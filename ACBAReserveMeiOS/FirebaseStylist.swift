@@ -19,7 +19,7 @@ class FirebaseStylist: FIRDataObject{
 	var id:String?
 	var store_number:CLong?
 	var haircut_time:Int=40//in mins 40 by default
-	
+	var pseudo_wait:Int = 0
 	required init(snapshot: FIRDataSnapshot) {
 		super.init(snapshot: snapshot)
 	}
@@ -47,7 +47,7 @@ class FirebaseStylist: FIRDataObject{
 		if wait == nil{
 			wait = 0
 		}
-		let total_min = haircut_time * wait!
+		let total_min = CLong(self.predictWait())
 		let hour = total_min / 60
 		let min = total_min % 60
 		if(hour==0) {
@@ -62,7 +62,7 @@ class FirebaseStylist: FIRDataObject{
 	func getReadyByDateFormat() -> String {
 		let df = DateFormatter()
 		df.dateFormat = "h:mm a"
-		let dateAfterMin = Date.init(timeIntervalSinceNow: (Double(calculateWait()) * 60.0))
+		let dateAfterMin = Date.init(timeIntervalSinceNow: (Double(self.predictWait()) * 60.0))
 		return df.string(from: dateAfterMin)
 	}
 	
@@ -72,6 +72,9 @@ class FirebaseStylist: FIRDataObject{
 		} else {
 			return false
 		}
+	}
+	func predictWait() -> CDouble{
+		return CDouble(self.pseudo_wait * self.haircut_time)
 	}
 	
 	override var hash: Int {
