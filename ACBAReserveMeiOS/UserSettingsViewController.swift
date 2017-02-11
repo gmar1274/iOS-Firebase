@@ -12,13 +12,13 @@ class UserSettingsViewController: UIViewController, UINavigationControllerDelega
 
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var nameLabel: UILabel!
-	
+	var emp:FirebaseEmployee!
 	//var user_data:NSData?
 	//var imagePicker = UIImagePickerController()
     override func viewDidLoad() {
         super.viewDidLoad()
 		let ct = self.tabBarController as! CustomTabBarController
-		let emp:FirebaseEmployee = ct.employee!
+		 emp = ct.employee!
 		let ref = FIRStorage.storage().reference().child("\(emp.store_phone!)/images/stylists/\(emp.id!)")
 		ref.data(withMaxSize: 10*1024*1024, completion: { data, error in//10 mb
 			if let error = error{
@@ -33,6 +33,51 @@ class UserSettingsViewController: UIViewController, UINavigationControllerDelega
 		
         // Do any additional setup after loading the view.
     }
+	@IBAction func resetStoreTicket(_ sender: Any) {
+		var alert = UIAlertController(title: "Reset shop's ticket to 0?", message: "This action cannot be reversed.", preferredStyle: .alert)
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+		let ok = UIAlertAction(title: "YES", style: .default){
+			action in
+			self.resetStoreTicket()
+		}
+		alert.addAction(cancel)
+		alert.addAction(ok)
+		self.present(alert, animated: true, completion: nil)
+	}
+	func resetStoreTicket(){
+		
+		let ref = FIRDatabase.database().reference().child("user/\(self.emp.store_number!)/current_ticket")
+	ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+			
+			//print("\n\nSNAPSHOT:: \(currentData.value)\n\n")
+			if currentData.childrenCount > 0 {
+				currentData.value = 0
+				
+				return FIRTransactionResult.success(withValue: currentData)
+			}//end if somethings there NOT NILL
+			else{//first ticket
+			currentData.value = 0
+			}
+			return FIRTransactionResult.success(withValue: currentData)
+			}){ (error, committed, snapshot) in
+				if let error = error {
+					print(error.localizedDescription)
+				}else{
+					
+					
+					let a = UIAlertController(title: "Tickets have been restarted.", message: "Current ticket is now 1.", preferredStyle: .alert)
+					let k = UIAlertAction(title: "OK", style: .default)
+					a.addAction(k)
+					self.present(a, animated: true, completion: nil)
+					
+					
+				}
+			
+			
+		}
+		
+			
+	}
 
 	@IBAction func upload(_ sender: Any) {//change picture
 		print("here")

@@ -27,6 +27,7 @@ class EmployeeCurrentTicketsViewController: UIViewController, UITableViewDelegat
 		let ref = FIRDatabase.database().reference().child("tickets/\(self.employee!.store_number!)")
 		ref.observe(FIRDataEventType.value, with: {(snapshot) in
 		
+			self.tickets.removeAll()
 			for ds in snapshot.children{
 				let t = FirebaseTicket(snapshot: ds as! FIRDataSnapshot)
 				if !self.tickets.contains(t){
@@ -54,23 +55,22 @@ class EmployeeCurrentTicketsViewController: UIViewController, UITableViewDelegat
 		cell.ticket_number_label.text = t.unique_id.description
 		cell.stylist_label.text = t.stylist.uppercased()
 		cell.client_name.text = t.name.uppercased()
-		return UITableViewCell()
+		return cell
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		//give warning to delete
 		let t = self.tickets[indexPath.row]
 		var alert = UIAlertController(title: "Deleted tickets cannot be restored.", message: "Are you sure you want to delete ticket?", preferredStyle: .alert)
-		let action = UIAlertAction(title: "Cancel", style: .cancel){
-			action in
-			
-		}
+		let action = UIAlertAction(title: "Cancel", style: .cancel)
 		let ok = UIAlertAction(title: "YES", style: .default){
 			action in
+			//self.tickets.remove(at: indexPath.row)
 			self.deleteTicket(ticket: t)
 		}
 		alert.addAction(action)
 		alert.addAction(ok)
+		
 		self.present(alert, animated: true, completion: nil)
 	}
 	func deleteTicket(ticket:FirebaseTicket){
@@ -82,6 +82,7 @@ class EmployeeCurrentTicketsViewController: UIViewController, UITableViewDelegat
 				for key in currentData.children.allObjects as! [FIRMutableData] {
 					let dict = key.value as! [String:AnyObject]
 					if (dict["unique_id"] as! CLong) == ticket.unique_id{//dont add
+						
 					}else{
 						ticket_list.append(dict)
 					}

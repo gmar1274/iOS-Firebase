@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACBAReserveMeiOS/LiveFeed.swift"
-            timestampString = "508484546.247257"
+            timestampString = "508515184.686481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "495"
-            endingLineNumber = "495"
+            startingLineNumber = "516"
+            endingLineNumber = "516"
             landmarkName = "addCardViewController(_:didCreateToken:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACBAReserveMeiOS/FirebaseTicket.swift"
-            timestampString = "508259073.130849"
+            timestampString = "508513372.139548"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "init(unique_ticket:sty:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACBAReserveMeiOS/LiveFeed.swift"
-            timestampString = "508484546.247257"
+            timestampString = "508515184.686481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "589"
-            endingLineNumber = "589"
+            startingLineNumber = "623"
+            endingLineNumber = "623"
             landmarkName = "updateFirebaseTickets()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACBAReserveMeiOS/LiveFeed.swift"
-            timestampString = "508484546.247257"
+            timestampString = "508515184.686481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "predictTimeForNewTicket(ticket_list:nextTicket:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACBAReserveMeiOS/LiveFeed.swift"
-            timestampString = "508484546.247257"
+            timestampString = "508515184.686481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "predictTimeForNewTicket(ticket_list:nextTicket:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACBAReserveMeiOS/LiveFeed.swift"
-            timestampString = "508484546.247257"
+            timestampString = "508515184.686481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "ticketListener()"
             landmarkType = "7">
          </BreakpointContent>
@@ -201,13 +201,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ACBAReserveMeiOS/LoginViewController.swift"
-            timestampString = "508501312.984711"
+            filePath = "ACBAReserveMeiOS/UserSettingsViewController.swift"
+            timestampString = "508519721.406888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "firebaseQueryStylist(username:pass:alert:)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "resetStoreTicket(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ACBAReserveMeiOS/UserSettingsViewController.swift"
+            timestampString = "508519726.69688"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "resetStoreTicket()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

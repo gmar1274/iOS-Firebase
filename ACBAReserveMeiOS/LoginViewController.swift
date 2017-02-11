@@ -92,12 +92,15 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 					break
 				}
 			}
-			alert.dismiss(animated: false, completion: nil)
-			if user == nil{
-				self.error(msg: "Username or password is invalid...")
-			}else{
-				self.goToEmployeeActivity(user: user!)
-			}
+			
+			alert.dismiss(animated: false, completion: { a in
+				if user == nil{
+					self.error(msg: "Username or password is invalid...")
+				}else{
+					self.goToEmployeeActivity(user: user!)
+				}
+			})
+			
 			
 			/*let arr = snapshot.value as? [[String:AnyObject]]
 			if (arr?.count)! > 0{
@@ -132,7 +135,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 		let vc = self.storyboard?.instantiateViewController(withIdentifier: "stylist_tbc") as! CustomTabBarController
 		vc.employee = user
 		vc.selectedIndex = 0
-		self.present(vc, animated: true, completion: nil)
+		self.present(vc, animated: false, completion: nil)
 		
 	}
 	

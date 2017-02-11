@@ -9,8 +9,9 @@
 import UIKit
 import Firebase
 import Stripe
+import GoogleMobileAds
 
-class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , STPPaymentContextDelegate, STPAddCardViewControllerDelegate , GADBannerViewDelegate{
+class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , STPPaymentContextDelegate, STPAddCardViewControllerDelegate , GADBannerViewDelegate, GADInterstitialDelegate{
 	let TEST = true
 	
 	var paymentContext:STPPaymentContext?
@@ -31,7 +32,10 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 	
 	var ticketHistory:[FirebaseTicket] = []
 	@IBOutlet var store_name_label: UILabel!
-	
+	var adMovie: GADInterstitial!
+	//App ID: ca-app-pub-9309556355508377~2611344846
+	//Ad unit ID: ca-app-pub-9309556355508377/9700632849	
+	//for interesterial ad
 	init(){
 		self.myAPIClient = POSTAPIClient()
 		self.paymentContext = STPPaymentContext(apiAdapter: MyAPIClient())
@@ -51,10 +55,27 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		super.init(coder: aDecoder)!
 		
 	}
-
+	func createAndLoadInterstitial() -> GADInterstitial {
+		var interstitial = GADInterstitial(adUnitID: "ca-app-pub-9309556355508377/9700632849")
+		interstitial.delegate = self
+		var request = GADRequest()
+		
+		if TEST{
+			request.testDevices = ["2077ef9a63d2b398840261c8221a0c9b"]
+		}
+		interstitial.load(request)
+		return interstitial
+	}
+	
+	func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+		self.adMovie = createAndLoadInterstitial()
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.adMovie = self.createAndLoadInterstitial()
+		self.adMovie.delegate = self
 		self.adBannerView.adSize = kGADAdSizeSmartBannerPortrait
 		self.adBannerView.delegate = self
 		self.adBannerView.rootViewController = self
@@ -536,7 +557,15 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 	
 	
 	func showReceipt(userTicket:FirebaseTicket) {
-		print("int receipt code...")
+		
+		if self.adMovie.isReady{
+			self.adMovie.present(fromRootViewController: self)
+		}
+			self.showTicketConfirmed(userTicket: userTicket)
+		
+	}
+	func showTicketConfirmed(userTicket:FirebaseTicket){
+		print("int tick confirmed code...")
 		let curr_sty = self.stylist_array[self.curr_index]
 		userTicket.readyBy = curr_sty.getReadyByDateFormat()
 		self.ticketHistory.append(userTicket)
@@ -544,6 +573,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		tc.pastTickets = self.ticketHistory//update list
 		
 		self.displayAlertMsgDialog(msg: "Transaction was successful.", title: "Your ticket # is: \(userTicket.unique_id)")
+		
 	}
 	
 	func showError(err:Error,msg:String,title:String){
