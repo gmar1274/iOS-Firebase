@@ -8,20 +8,38 @@
 
 import Foundation
 import Firebase
-class FirebaseStylist: FIRDataObject{
+class FirebaseStylist: NSObject{
 	var name:String?
-	var available:Bool?
+	var available:NSNumber?
 	var fname:String?
 	var mname:String?
 	var lname:String?
 	var phone:String?
-	var wait:Int?
+	var wait:NSNumber?
 	var id:String?
-	var store_number:CLong?
-	var haircut_time:Int=40//in mins 40 by default
-	var pseudo_wait:Int = 0
+	var store_number:NSNumber?
+	var haircut_time:NSNumber=35//in mins 35 by default
+	var pseudo_wait:NSNumber = 0
 	required init(snapshot: FIRDataSnapshot) {
-		super.init(snapshot: snapshot)
+		super.init()
+		
+		guard let dict = snapshot.value as? [String:AnyObject] else{
+			return
+		}
+		
+		for key in dict.keys{
+			
+			if responds(to: Selector(key)){
+				setValue(dict[key] , forKey: key)
+			}else{
+				
+				print("Key: \(key) Value: \(dict[key]) not found..\n")
+			}
+			
+		}
+		
+		
+		//super.init(snapshot: snapshot)
 	}
 	func getApproxWait(service_time_mins:CDouble) -> String {
 		
@@ -57,7 +75,7 @@ class FirebaseStylist: FIRDataObject{
 	}
 	///Total wait in mins
 	func calculateWait() -> Int{
-		return wait! * haircut_time
+		return NSNumber(value: (wait?.doubleValue)! * haircut_time.doubleValue).intValue
 	}
 	func getReadyByDateFormat() -> String {
 		let df = DateFormatter()
@@ -74,7 +92,7 @@ class FirebaseStylist: FIRDataObject{
 		}
 	}
 	func predictWait() -> CDouble{
-		return CDouble(self.pseudo_wait * self.haircut_time)
+		return CDouble(self.pseudo_wait.doubleValue * self.haircut_time.doubleValue)
 	}
 	
 	override var hash: Int {

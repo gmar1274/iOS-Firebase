@@ -21,6 +21,7 @@ class FIRDataObject: NSObject{
 		self.subtitle=""
 		super.init()
 		for child in snapshot.children.allObjects as? [FIRDataSnapshot] ?? []{
+			//print("CHILD IN FIROBJJ:: \(child)\n\nKEYY: \(child.key)\n\nVALUEE: \(child.value)\n")
 			if responds(to: Selector(child.key)){
 				setValue(child.value, forKey: child.key)
 			}

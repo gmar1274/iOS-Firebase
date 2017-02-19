@@ -5,13 +5,24 @@
 //  Created by user on 12/22/16.
 //  Copyright © 2016 user. All rights reserved.
 //
+/*
+This class is responsible for the main functionality of the APP. After loading the Firebase Store then
+this class access the the stylists from the firebase database...
+URL format is: stylists/Store_number/Map<Stylist>
+URL for updating stylist availability will be: store_hours/Store_number/Map<DAYS_OF_THE_WEEK>/{open:"",close:""}
 
+URL for ticket change: tickets/Store_number/List<Tickets>
+*/
 import UIKit
 import Firebase
 import Stripe
 import GoogleMobileAds
 
 class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , STPPaymentContextDelegate, STPAddCardViewControllerDelegate , GADBannerViewDelegate, GADInterstitialDelegate{
+	
+	var Loaded:[String:Bool] = [:]
+	
+	
 	let TEST = true
 	
 	var paymentContext:STPPaymentContext?
@@ -73,7 +84,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		self.Loaded = [:]//new loaded dictionary every time
 		self.adMovie = self.createAndLoadInterstitial()
 		self.adMovie.delegate = self
 		self.adBannerView.adSize = kGADAdSizeSmartBannerPortrait
@@ -104,6 +115,33 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: sc, for: indexPath) as! StylistCellView
 		
+		if Loaded[stylist.id!] == nil || Loaded[stylist.id!]==false {//have not yet attached a firebase listener to it
+			self.Loaded[stylist.id!] = true
+			let path = "stylists/\(self.store!.store_number!.description)/\(stylist.id!)"
+			
+			var ref = FIRDatabase.database().reference().child(path)
+			ref.observe(FIRDataEventType.value, with: {datasnap in
+				
+				//print("PATH:: \(path)\n")
+				guard let child = datasnap as? FIRDataSnapshot, datasnap.value != nil else{
+					//print("sty is null....\(datasnap)")
+					self.stylist_array.remove(at: indexPath.row)
+					self.hashMap.removeValue(forKey: stylist.id!)
+					self.stylistTableView.reloadData()
+					return
+				}
+				//print("TABLE VIEW DS: \(child)\n")
+				var sty = FirebaseStylist(snapshot: child)
+				sty.store_number = self.store?.store_number as NSNumber?
+				sty.pseudo_wait = stylist.pseudo_wait
+				sty.wait = stylist.wait
+				self.stylist_array.remove(at: indexPath.row)
+				self.stylist_array.insert(sty, at: indexPath.row)
+				self.hashMap[sty.id!] = sty
+				self.stylistTableView.reloadData()
+			})
+		}
+		
 		cell.stylistName.text = stylist.name!.uppercased()
 		cell.waitingLabel.text = "\(stylist.wait!)"
 		cell.approxWait.text = stylist.getApproxWait()
@@ -112,7 +150,10 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		cell.requestTicketBtn.addTarget(self, action: #selector(LiveFeed.requestBtn(_:)), for: .touchUpInside)
 		cell.callBtn.addTarget(self, action: #selector(LiveFeed.call(_:)), for: .touchUpInside)
 		cell.stylistImageView.image = UIImage(data: self.stylist_bitmaps[stylist.id!]!)
-		
+		let avail:Bool = (stylist.available?.boolValue)!
+		cell.isUserInteractionEnabled = avail	//makecell disabled
+		cell.callBtn.isEnabled = avail
+		cell.requestTicketBtn.isEnabled = avail
 		return cell
 		
 	}
@@ -140,8 +181,8 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 				//creditCardDialog(index:index)
 				//self.paymentContext?.requestPayment()
 				
-				//self.showAddCard()//this ,ethod shows to add card and processes it
-				self.updateFirebaseTickets()
+				self.showAddCard()//this ,ethod shows to add card and processes it
+				//self.updateFirebaseTickets()
 			})
 		self.present(alert, animated: true, completion: nil)
 		
@@ -192,12 +233,12 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		
 		self.store = self.mainTabController?.store//always updating ..
 		
-		
 		if store == nil {
 			return
-		}else if stylist_array.count>0 && stylist_array[0].store_number! == store!.store_number!{
+		}else if stylist_array.count>0 && (stylist_array[0].store_number?.int64Value)! == NSNumber(value:store!.store_number!).int64Value {
 			return
 		}
+		self.Loaded = [:]
 		self.hashMap.removeAll()
 		
 		self.store_name_label.text = store!.name!
@@ -240,67 +281,66 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 	WILL RELOAD THE TABLE VIEW AFTER IT MAKES ITS PREDICTION.
 	ALGORITHMN: NO_PREF Queue pop till it equally distributes all stylists..set pseudo wait and time for stylist_array
 	*/
-	func predictTimeForNewTicket(ticket_list:[[String:AnyObject]], nextTicket: Int){
+	func predictTimeForNewTicket(ticket_list:[[String:AnyObject]], nextTicket: CLong){
 		if ticket_list.count == 0{
 			self.stylistTableView.reloadData()
 			return
 		}
 		var q:[String:[CLong]] = [:]// queue for each stylist
-		for sty in self.stylist_array{
+		for sty in self.stylist_array where (sty.available?.boolValue)!  { // get only avaliable stylists
 			let sty_wait_list = ticket_list.split(whereSeparator:{ (($0["stylist_id"]) as! String) != sty.id!})//has all elements of the array as user_ticket -> stylist_id
 			//print("\nt_list: \(t_list)\n")//it is an array of ArraySlice
 			//for some reason array splice works with containing all elements not as specified by predicate..so not not equals will give me the array of only ..
-			q[sty.id!] = grabLine(forStylistID: sty.id!, ticketLineForStylist: sty_wait_list )
-			//print("ID:\(sty.id!) Q: \(q[sty.id!])")
+			var s_queue = grabLine(forStylistID: sty.id!, ticketLineForStylist: sty_wait_list ) //sorted before user ticket
+			sty.wait = NSNumber(value: s_queue.count)
+			if sty.id! != "-1"{ //add to every stylist that is not the store
+				s_queue.append(nextTicket)//add user ticket
+				s_queue.sort(by: {$0<$1}) //sort with user ticket
+			}
+			q[sty.id!] = s_queue //update --
+			self.hashMap[sty.id!] = sty
 		}
 		//let temp_ticket = ticket_list
-		var pref_q = q["-1"] //the line for store
-		q.removeValue(forKey: "-1")
+		guard var pref_q = q["-1"] else{
+			return//nothing here so just return because queue wasnt set possible bug ...guard agfainst this
+		} //the line for store
+		q.removeValue(forKey: "-1") // This step i remove the no_pref queue and I have all queues waiting for stylists
 		
-		while (pref_q?.count)! > 0 {
-			var element = pref_q?[0]
-			//print("while loop: elem: \(element)")
-			if(element == nil){
-				break
-			}
-			for sty_q in q.keys{ //all thats non -1
-				if q[sty_q]?.count==0 || element! < (q[sty_q]?[0])! {
-					q[sty_q]?.insert(element!, at: 0)
+		while (pref_q.count) > 0 {//while still tickets to be calculated
+			
+			for sty_q in q.keys where pref_q.count > 0 { //all thats non -1, distribute ticket naively
+				var element = pref_q[0]
+				
+				if q[sty_q]?.count==0 || element < (q[sty_q]?[0])! { // if the queue is empty or element(curr_ticket) is smaller than the current smallest
+				
+					q[sty_q]?.insert(element, at: 0)
 				}else{
-					var wait_line = q[sty_q]
-					wait_line?.append(element!)
-					wait_line?.sort(by: {$0 < $1})
-					q[sty_q] = wait_line
+					var wait_line = q[sty_q] // get the ticket_QUEUE
+					wait_line?.append(element)//add
+					wait_line?.sort(by: {$0 < $1})//sort in order
+					q[sty_q] = wait_line//update new QUEUE
 				}
-				pref_q?.removeFirst()
-				if((pref_q?.count)! > 0){
-					element = pref_q?[0]
-				}else{
-					break
-				}
+				pref_q.removeFirst()
+				
 			}
 		}
-		for sty in q.keys{
-			q[sty]?.append(nextTicket)
-		}
-		//print("\nOrdered Q: \(q)\n")
-		
 		//stylist_array should be set from a previous call to firebase db
 		//now we need to just update the array with our new predictive data
 		var sty_arr:[FirebaseStylist] = []
 		var lowest_time:[Int] = [] //id of lowest wait
-		for sty in self.stylist_array {
+		for sty in self.stylist_array where sty.id != "-1" {
 			let s = self.hashMap[sty.id!]
-			if q[sty.id!] == nil{//store_id == -1
-			}else{
-				s?.pseudo_wait = Int((q[sty.id!]?.index(of: nextTicket))!)
+			if q[sty.id!] == nil {// NOT ACTIVE STYLIST ALSO NOT STORE..
 				sty_arr.append(s!)
-				lowest_time.append((s?.pseudo_wait)!)
+			}else{
+				s!.pseudo_wait = NSNumber(value: Int((q[sty.id!]?.index(of: nextTicket))!))
+				sty_arr.append(s!)
+				lowest_time.append(Int((s?.pseudo_wait)!))
 			}
 		}
 		lowest_time.sort(by: {$0<$1})
-		var store = self.hashMap["-1"]
-		store?.pseudo_wait = lowest_time[0]
+		let store = self.hashMap["-1"]//no pref queue
+		store?.pseudo_wait = NSNumber(value:lowest_time[0]) ?? 0
 		sty_arr.insert(store!, at: 0)
 		
 		self.stylist_array.removeAll()
@@ -318,20 +358,20 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		//get stylist info then loop for every stylist for their image
 		//print("Store Number: \(store!.store_number!)")// need to force unwrap becuz its assumed at this point the store exists
 		FIRDatabase.database().reference().child("stylists/\(store!.store_number!)").observeSingleEvent(of: FIRDataEventType.value, with: {(snapshot) in
-		/* let dict = snapshot.value as? [String : AnyObject] ?? [:]
-			for a in dict.keys{
-				print("Keys: \(a) ")//value: \(dict[a])")
-			}
-			print("VALUE: \(snapshot.value)")
-			*///this gets the datashot as a map<String,Obj>
+		
 			for ds in snapshot.children{
-				var sty = FirebaseStylist(snapshot: ds as! FIRDataSnapshot)
-				
-				let dict = (ds as! FIRDataSnapshot).value as? [String : AnyObject] ?? [:]
+				let child = ds as! FIRDataSnapshot
+				//print("CLID VALUE:: \(child.value)\n\n")
+				var sty = FirebaseStylist(snapshot: child)
+				sty.store_number = NSNumber(value: self.store!.store_number!)
+				/*let dict = (ds as! FIRDataSnapshot).value as? [String : AnyObject] ?? [:]
 				sty.store_number = self.store!.store_number!
 				sty.wait = dict["wait"] as! Int ?? 0
+				
+				*/
 				self.stylist_array.append(sty)
 				self.hashMap[sty.id!] = sty
+			
 			}
 			self.stylist_array.sort(by: {$0.id! < $1.id!})
 			self.loadFirebaseImages(alert:alert)
@@ -370,13 +410,8 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 			//print("in store... : \(snapshot)")
 			let value = snapshot.value as! CLong
 			self.store!.current_ticket = value
-			var sum = 0
-			for sty in self.stylist_array{
-				sum += sty.wait!
-			}
-			if sum == 0{
-				self.curr_ticket_label.text = value.description
-			}//self.your_ticket_label.text = (value+1).description
+			self.curr_ticket_label.text = value.description
+			
 		})
 		
 		
@@ -397,23 +432,23 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 				let value = tickets
 				self.resetWaitForStylists()//clear existing values for sty in hashmap
 				let curr = value[0]["unique_id"] as! CLong
-				self.store!.current_ticket = curr
+				//self.store!.current_ticket = curr
 				
 				let next_ticket = value[value.count-1]["unique_id"] as! CLong
 				self.curr_ticket_label.text = curr.description
 				self.your_ticket_label.text = (next_ticket+1).description
-				for ds in value{
+				/*for ds in value{
 					let id = ds["stylist_id"] as! String
 					//let tn = CLong(ds["ticket_number"] as! String)
 					let sty = self.hashMap[id]
-					sty!.wait! += 1
+					sty!.wait? = NSNumber(value: (sty?.wait?.intValue)!+1 )
 					self.hashMap[id] = sty
-				}
+				}*/
 				self.predictTimeForNewTicket(ticket_list: value, nextTicket: Int(next_ticket+1))//will reload the data
 			}else{
 				let curr = self.store!.current_ticket
 				self.curr_ticket_label.text = curr.description
-				self.your_ticket_label.text = (curr+1).description
+				self.your_ticket_label.text = (curr).description
 				self.zeroOutStylistWaiting()
 				self.stylistTableView.reloadData()
 			}
@@ -557,12 +592,10 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 	
 	
 	func showReceipt(userTicket:FirebaseTicket) {
-		
+		self.showTicketConfirmed(userTicket: userTicket)
 		if self.adMovie.isReady{
 			self.adMovie.present(fromRootViewController: self)
 		}
-			self.showTicketConfirmed(userTicket: userTicket)
-		
 	}
 	func showTicketConfirmed(userTicket:FirebaseTicket){
 		print("int tick confirmed code...")
@@ -595,7 +628,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 	*/
 	func updateFirebaseTickets(){
 		let sty = self.stylist_array[self.curr_index]
-		var user_ticket = FirebaseTicket(unique_ticket: sty.wait!+1, sty: sty)
+		let user_ticket = FirebaseTicket(unique_ticket: (sty.wait?.intValue)!+1, sty: sty)
 		
 		let ref = FIRDatabase.database().reference().child("tickets/\(self.store!.store_number!)")
 	
@@ -616,9 +649,9 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 				//print("in trans:: \(tickets)")
 				user_ticket.unique_id = tickets[tickets.count-1]["unique_id"] as! CLong
 				user_ticket.unique_id += 1
-				let t_list = tickets.split(whereSeparator:{ (($0["stylist_id"]) as! String) != user_ticket.stylist_id})//has all elements of the array as user_ticket -> stylist_id
+				//let t_list = tickets.split(whereSeparator:{ (($0["stylist_id"]) as! String) != user_ticket.stylist_id})//has all elements of the array as user_ticket -> stylist_id
 				//print("\nt_list: \(t_list)\n")//it is an array of ArraySlice
-				if t_list != nil && t_list.count > 0 { //there exists stylist_id with an existing ticket_number... so lets get the latest number to update our user ticket for sty
+				/*if t_list != nil && t_list.count > 0 { //there exists stylist_id with an existing ticket_number... so lets get the latest number to update our user ticket for sty
 					let ticket_ahead_of_user  = t_list[t_list.count-1].sorted(by: ({ (CLong($0["ticket_number"] as! String) )! > ( CLong($1["ticket_number"] as! String) )!} )) //sort all subset that contains stylist id by -> ticket_number trying to get the max
 					//print("\n\nTEMP:: \(temp)")
 					let ft = ticket_ahead_of_user[0]["ticket_number"] as! String
@@ -626,7 +659,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 					user_ticket.ticket_number = (max_ticket_number! + 1).description
 				}else{//first in list
 					user_ticket.ticket_number = "1"
-				}
+				}*/
 				let map = user_ticket.getDictionaryFormat()
 				tickets.append(map)
 				currentData.value = tickets
@@ -647,7 +680,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 				print(error.localizedDescription)
 			}else{
 				self.showReceipt(userTicket:user_ticket)
-				self.updateCurrentTicketForStore(userTicket:user_ticket)
+				//self.updateCurrentTicketForStore(userTicket:user_ticket)
 			}
 		}
 		
