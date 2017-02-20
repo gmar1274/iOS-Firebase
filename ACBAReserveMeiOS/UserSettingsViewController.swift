@@ -31,7 +31,19 @@ class UserSettingsViewController: UIViewController, UINavigationControllerDelega
 		})//end statement
 		self.nameLabel.text = emp.name!.uppercased()
 		
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.////LOADED IMAGE
+		let path = "stylists/\(self.emp.store_number!.description)/\(self.emp.id!.description)/available"
+		let ref_avail = FIRDatabase.database().reference().child(path)
+		ref_avail.observe(FIRDataEventType.value, with: {snap in
+			guard let avail = snap.value as? Bool else{
+				self.statusLabel.text = "Not Active"
+				print("err \(snap)")
+				return
+			}
+			self.switchStatus.isOn = avail
+			self.determineTextForSwitch(sender: self.switchStatus)
+		
+		})
     }
 	@IBAction func resetStoreTicket(_ sender: Any) {
 		var alert = UIAlertController(title: "Reset shop's ticket to 0?", message: "This action cannot be reversed.", preferredStyle: .alert)
@@ -109,7 +121,97 @@ class UserSettingsViewController: UIViewController, UINavigationControllerDelega
 		imageView.image = image
 		
 	}
+	////settings::
+	@IBOutlet var statusLabel: UILabel!
+	@IBOutlet var switchStatus: UISwitch!
+	
+	@IBAction func statusChanged(_ sender: UISwitch) {
+		statusRequest(sender:sender)
+	}
+	func statusRequest(sender : UISwitch){
+		let alert = self.displayLoadingDialog(title: "Updating Status", msg: "Please wait...")
+		self.present(alert, animated: true, completion: nil)
+		let path = "stylists/\(self.emp.store_number!.description)/\(self.emp.id!.description)/available"
+		let ref = FIRDatabase.database().reference().child(path)
+		ref.setValue(sender.isOn){(err , ref) in
+			alert.dismiss(animated: true, completion: {
+				if err != nil{//error
+					self.displayMessage(title: "Error.", msg: "Something went wrong. No data was updated.")
+				}else{//success
+					self.determineTextForSwitch(sender:sender)
+					self.displayMessage(title: "Success", msg: "Status updated!")
+				}
+			})//alert handler
+			
+		}
+	}
+	func determineTextForSwitch(sender:UISwitch){
+		if sender.isOn {
+			self.statusLabel.text = "Active"
+		}else{
+			self.statusLabel.text = "Not Active"
+		}
+	}
+	
 
-
+	@IBAction func phontTFChanged(_ sender: UITextField) {
+		if sender.text?.characters.count == 10{
+			//print("10 lentgh detected!!")
+			self.updatePhone(phone:sender.text!)
+		}//else{
+		//	print("TEXT: \(sender.text?.description)")
+		//}
+		
+	}
+	/***APPAREANTLY FIREBASE ONLY ALLOWS STRING AS an ANY object only. SO CAST A STRING TO ANY.
+*/
+	func updatePhone(phone : String){
+		var alert = UIAlertController(title: "Update phone?", message: "Click to set your preferred contact number to '\(phone.description)'.", preferredStyle: .alert)
+		let act = UIAlertAction(title: "Update", style: .default, handler: { ui in
+			let path = "stylists/\(self.emp.store_number!.description)/\(self.emp.id!.description)/phone"
+			let ref = FIRDatabase.database().reference().child(path)
+			let loading = self.displayLoadingDialog(title: "Updating", msg: "Please wait...")
+			let obj = phone as! Any
+			ref.setValue(obj){ (err,fir) in
+				if err != nil{
+					//print("errr....")
+					self.displayMessage(title: "Error", msg: "Something went wrong. No data has been changed...")
+				}else{
+					//print("here don ok...")
+					//loading.dismiss(animated: true, completion: {
+					self.displayMessage(title:"Phone updated!",msg:"Phone number changed.")//				})
+				}
+			}//end setValue
+			
+		})//end action
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		alert.addAction(cancel)
+		alert.addAction(act)
+		self.present(alert, animated: true, completion: nil)
+		
+	}
+	func displayMessage(title:String, msg:String){
+		var alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+		let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+		alert.addAction(action)
+		self.present(alert, animated: true, completion: nil)
+	}
+	//////////////LOADING DIALOG
+	
+	func displayLoadingDialog(title:String, msg:String) -> UIAlertController{
+		var alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+		
+		alert.view.tintColor = UIColor.black
+		
+		let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
+		loadingIndicator.hidesWhenStopped = true
+		loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+		loadingIndicator.startAnimating();
+		
+		alert.view.addSubview(loadingIndicator)
+		return alert
+		//present(alert, animated: true, completion: nil)//display seraching
+	}
+	
 
 }

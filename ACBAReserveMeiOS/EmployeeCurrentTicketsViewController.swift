@@ -24,7 +24,7 @@ class EmployeeCurrentTicketsViewController: UIViewController, UITableViewDelegat
 		
 		self.ticketsTableView.dataSource = self
 		self.ticketsTableView.delegate = self
-		let ref = FIRDatabase.database().reference().child("tickets/\(self.employee!.store_number!)")
+		let ref = FIRDatabase.database().reference().child("tickets/\(self.employee!.store_number!.description)")
 		ref.observe(FIRDataEventType.value, with: {(snapshot) in
 		
 			self.tickets.removeAll()
@@ -82,7 +82,7 @@ class EmployeeCurrentTicketsViewController: UIViewController, UITableViewDelegat
 				for key in currentData.children.allObjects as! [FIRMutableData] {
 					let dict = key.value as! [String:AnyObject]
 					if (dict["unique_id"] as! CLong) == ticket.unique_id{//dont add
-						
+						//I delete by adding a list of tickets all that is no the ticket "ticket"
 					}else{
 						ticket_list.append(dict)
 					}
@@ -100,10 +100,27 @@ class EmployeeCurrentTicketsViewController: UIViewController, UITableViewDelegat
 				print(error.localizedDescription)
 			}else{
 				//self.showReceipt(userTicket:user_ticket)
-				//self.updateCurrentTicketForStore(userTicket:user_ticket)
+				self.updateCurrentTicketForStore(userTicket:ticket)
 			}
 		}
 		
 	}
 	
+	func updateCurrentTicketForStore(userTicket: FirebaseTicket){
+		let path = "user/\(self.employee!.store_number!.description)/current_ticket"
+		var ref = FIRDatabase.database().reference().child(path)
+		ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+			guard let ct = currentData.value as? CLong else {
+				currentData.value = userTicket.unique_id
+				return FIRTransactionResult.success(withValue: currentData)
+			}
+			if  userTicket.unique_id > ct {
+				currentData.value = userTicket.unique_id
+			}
+			return FIRTransactionResult.success(withValue: currentData)
+			
+			
+		})
+	
+	}
 }
