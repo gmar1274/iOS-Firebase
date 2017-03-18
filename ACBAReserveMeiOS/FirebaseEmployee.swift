@@ -15,7 +15,24 @@ class FirebaseEmployee : NSObject{
 	var store_number:String?
 	var store_phone:String?
 	
+	var phone:String?
+	var type:String?//{}OWNER,EMPLOYEE,MANAGER are the types
 	
+	
+	convenience init(emp:FirebaseEmployee,name:String,email:String){
+		self.init()
+		self.name = name
+		self.id = Utils.generateID(username: email)
+		self.app_username = email
+		self.app_password = emp.store_phone!.sha1()
+		self.store_phone = emp.store_phone
+		self.store_number = emp.store_number
+		self.phone = "N/A"
+		self.type = "EMPLOYEE"
+		
+	}
+	
+	//CONVERT DATASNAPSHOT TO THIS OBJECT
 	convenience init(snapshot : FIRDataSnapshot){
 		self.init()
 		for child in snapshot.children.allObjects as? [FIRDataSnapshot] ?? []{

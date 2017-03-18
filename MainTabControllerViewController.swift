@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MainTabControllerViewController: UITabBarController {
 	
 	var pastTickets:[FirebaseTicket]=[]
 	var store:FirebaseStore?
+	var locationManager: CLLocationManager?
+	var location: CLLocation?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 		        // Do any additional setup after loading the view.

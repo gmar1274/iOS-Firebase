@@ -21,16 +21,17 @@ class FirebaseStore : FIRDataObject, MKAnnotation{
 	var email:String?
 	var google_place_id:String?
 	var location:LatLng?
-	var miles_away:CDouble?
+	var miles_away:NSNumber?
 	var name:String?
 	var open_time:String?
 	var password:String?
 	var phone:String?
-	var reservation_calendar_price:CDouble?
-	var store_number:CLong?
+	var reservation_calendar_price:NSNumber?
+	var store_number:NSNumber?
 	var subscription_id:String?
-	var ticket_price:CDouble?
-	var current_ticket:CLong = 0
+	var ticket_price:NSNumber?
+	var current_ticket:NSNumber = 0
+	var period:[Any]?
 	 /*init() {
 		super.init(snapshot: snap)
 		self.address=""
@@ -52,37 +53,44 @@ class FirebaseStore : FIRDataObject, MKAnnotation{
 	}*/
 	
 	required init(snapshot: FIRDataSnapshot) {
+		
 		super.init(snapshot: snapshot)
-		//self.coordinate = CLLocation(latitude: 0, longitude: 0).coordinate
-		//fatalError("init(snapshot:) has not been implemented")
+		
+		self.title = self.name
+		self.subtitle = ""
+		
 	}
 	
-	func operatingHours() -> String {
-		let date_formatter = DateFormatter()
-		date_formatter.dateFormat = "HH:mm:ss" //change to date
-		let open_date = date_formatter.date(from: self.open_time!)
-		let close_date = date_formatter.date(from: self.close_time!)
-		let date_formatter_12hr = DateFormatter()
-		date_formatter_12hr.dateFormat = "h:mm a"
-		return date_formatter_12hr.string(from: open_date!) + "-" + date_formatter_12hr.string(from: close_date!)
-	}
 	func setLocation(latlng:LatLng){
 		self.title=name!
 		self.location = latlng
-		self.coordinate = CLLocation(latitude:(self.location?.latitude)!,longitude:(self.location?.longitude)!).coordinate
+		self.coordinate = CLLocation(latitude:CLLocationDegrees((self.location?.latitude)!),longitude:CLLocationDegrees((self.location?.longitude)!)).coordinate
 	}
 	// annotation callout info button opens this mapItem in Maps app
 	func mapItem() -> MKMapItem {
-		self.title = self.name!
-		self.subtitle = "custom sub title..."
-  let addressDictionary = [String(kABPersonAddressStreetKey): "SubTitle"]
-  let placemark = MKPlacemark(coordinate: self.coordinate , addressDictionary: addressDictionary as AnyObject as! [String : AnyObject])
+		let addressDictionary = [String(kABPersonAddressStreetKey): subtitle]
+  let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDictionary as AnyObject as! [String : AnyObject])
 		
   let mapItem = MKMapItem(placemark: placemark)
-  mapItem.name = self.name
+  mapItem.name = self.name!
 		
   return mapItem
 	}
-
+	// returns an integer from 1 - 7, with 1 being Sunday and 7 being Saturday
+	func getDayOfWeek()->Int {
+		let formatter  = DateFormatter()
+		formatter.dateFormat = "yyyy-MM-dd"
+		let todayDate = Date()
+		let myCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+		let myComponents = myCalendar.components(.weekday, from: todayDate)
+		let weekDay = myComponents.weekday
+		return (weekDay! - 2) % 7 // this now returns 0 - 6 as 0==monday ... 6== sunday
+	}
+	func getOperationalHours() -> String{
+		let i = self.getDayOfWeek()
+		//print("Day: \(i)")
+		let hours = self.period?[i]
+		return hours as! String
+	}
 	
 }

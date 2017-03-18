@@ -119,7 +119,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 			self.Loaded[stylist.id!] = true
 			let path = "stylists/\(self.store!.store_number!.description)/\(stylist.id!)"
 			
-			var ref = FIRDatabase.database().reference().child(path)
+			let ref = FIRDatabase.database().reference().child(path)
 			ref.observe(FIRDataEventType.value, with: {datasnap in
 				
 				//print("PATH:: \(path)\n")
@@ -149,30 +149,43 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		cell.requestTicketBtn.tag = indexPath.row
 		cell.requestTicketBtn.addTarget(self, action: #selector(LiveFeed.requestBtn(_:)), for: .touchUpInside)
 		cell.callBtn.addTarget(self, action: #selector(LiveFeed.call(_:)), for: .touchUpInside)
-		cell.stylistImageView.image = UIImage(data: self.stylist_bitmaps[stylist.id!]!)
 		let avail:Bool = (stylist.available?.boolValue)!
 		cell.isUserInteractionEnabled = avail	//makecell disabled
 		cell.callBtn.isEnabled = avail
 		cell.requestTicketBtn.isEnabled = avail
+		
+		
+		
+		guard let data = self.stylist_bitmaps[stylist.id!] else{
+			cell.stylistImageView.image = UIImage(named: "120.png")
+			return cell
+		}
+			
+		cell.stylistImageView.image = UIImage(data: data)
+		
 		return cell
 		
 	}
 	 func call(_ stylist:UIButton){
+		print("pressed")
 		let index = stylist.tag
 		let sty = self.stylist_array[index]
-		if sty != nil && sty.phone != nil {
-			Utils.callNumber(sty.phone!)
+		if (sty.phone?.characters.count)! < 11{
+			Utils.callNumber(store!.phone!)
+		}else{
+		  Utils.callNumber(sty.phone!)
 		}
 	}
 	/***
 	GETS CALLED FROM TABLE VIEW ON BUTTON SELETEC
+	WILL activate credit card processing and secure a ticket for shop
 	*/
 	func requestBtn(_ stylist:UIButton){
 		
 		let nf = NumberFormatter()
 		nf.currencySymbol = "$"
 		nf.numberStyle = .currency
-		let price = nf.string(from: NSNumber(value: store!.ticket_price!))
+		let price = nf.string(from: NSNumber(value: store!.ticket_price!.doubleValue))
 		let alert = UIAlertController(title: "The price to reserve a ticket will be \(price!)", message: "All tickets are non refundable. All transactions are done securely.", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil))
 		alert.addAction(UIAlertAction(title:"OK",style: .default){ action in
@@ -180,9 +193,12 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 				self.curr_index = index
 				//creditCardDialog(index:index)
 				//self.paymentContext?.requestPayment()
-				
+			if self.stylist_array[index].ticket_price == 0{////if no price then submit ticket
+					self.updateFirebaseTickets()
+			}else{//else show dialog to process payment
 				self.showAddCard()//this ,ethod shows to add card and processes it
-				//self.updateFirebaseTickets()
+			}
+			
 			})
 		self.present(alert, animated: true, completion: nil)
 		
@@ -235,14 +251,14 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		
 		if store == nil {
 			return
-		}else if stylist_array.count>0 && (stylist_array[0].store_number?.int64Value)! == NSNumber(value:store!.store_number!).int64Value {
+		}else if stylist_array.count>0 && (stylist_array[0].store_number?.int64Value)! == NSNumber(value:store!.store_number!.int64Value).int64Value {
 			return
 		}
 		self.Loaded = [:]
 		self.hashMap.removeAll()
 		
 		self.store_name_label.text = store!.name!
-		self.amount = Int((store?.ticket_price)! * 100)//could be bug ...
+		self.amount = Int(((store?.ticket_price)?.doubleValue)! * 100)//could be bug ...
 		//print("amount ticket:: \(self.amount)")
 		self.paymentContext?.paymentAmount = self.amount
 		var alert = UIAlertController(title: "Loading stylists", message: "Please wait...", preferredStyle: .alert)
@@ -363,7 +379,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 				let child = ds as! FIRDataSnapshot
 				//print("CLID VALUE:: \(child.value)\n\n")
 				var sty = FirebaseStylist(snapshot: child)
-				sty.store_number = NSNumber(value: self.store!.store_number!)
+				sty.store_number = NSNumber(value: self.store!.store_number!.int64Value)
 				/*let dict = (ds as! FIRDataSnapshot).value as? [String : AnyObject] ?? [:]
 				sty.store_number = self.store!.store_number!
 				sty.wait = dict["wait"] as! Int ?? 0
@@ -386,16 +402,27 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 			storage.data(withMaxSize: 10*1024*1024, completion: { data, error in//10 mb
 				if let error = error{
 					print("file error download exit...err: \(error)")
+					print("err b4 count: \(self.stylist_bitmaps.count)")
+					//if let resourcePath = Bundle.main.resourcePath {
+					//	let imgName = "120.png"
+					//	let path = resourcePath + "/" + imgName
+					let path = "120" //"AppIcon120x120"
+						let image = UIImage(named: path)
+						self.stylist_bitmaps[sty.id!] = UIImagePNGRepresentation(image!)
+					//}
 					
+					print("err after count: \(self.stylist_bitmaps.count)")
 				}else{
 					print("image success...")
 					self.stylist_bitmaps[sty.id!] = data!
-					if self.stylist_bitmaps.values.count == self.stylist_array.count{//finished
-						self.ticketListener()
-						
-						alert.dismiss(animated: true, completion: nil)
-					}
 				}
+			
+				if self.stylist_bitmaps.values.count == self.stylist_array.count{//finished
+					self.ticketListener()
+					
+					alert.dismiss(animated: true, completion: nil)
+				}
+				
 			})//end statement
 		}
 		
@@ -409,7 +436,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		store_ref.observe(FIRDataEventType.value, with: { snapshot in
 			//print("in store... : \(snapshot)")
 			let value = snapshot.value as! CLong
-			self.store!.current_ticket = value
+			self.store!.current_ticket = NSNumber(value: value)
 			self.curr_ticket_label.text = value.description
 			
 		})
@@ -523,7 +550,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 	                    didCreatePaymentResult paymentResult: STPPaymentResult,
 	                    completion: @escaping STPErrorBlock) {
 		
-  myAPIClient.completeCharge(token:paymentResult.source.stripeID ,amount: 1220,name:"ANON",email:"gnmartinezedu@hotmail.com" , completion: { (error: Error?) in
+  myAPIClient.completeCharge(token:paymentResult.source.stripeID ,amount: self.amount,name:"N/A",email:"gnmartinezedu@hotmail.com" , completion: { (error: Error?) in
 	if let error = error {
 		completion(error)
 	} else {
@@ -533,7 +560,12 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 	}
 	
 	///////ADD CARD DELEGATE
+	/****DISPLAY CREDIT CARD DIALOG FOR CARD PROCESSS
+
+*/
 	func showAddCard() {
+		
+		
 		let addCardViewController = STPAddCardViewController()
 		addCardViewController.delegate = self
 		// STPAddCardViewController must be shown inside a UINavigationController.
@@ -667,8 +699,8 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 			}//end if somethings there NOT NILL
 			else{//first ticket
 				var a:[String:AnyObject] = [:]
-				user_ticket.ticket_number = "1"
-				user_ticket.unique_id = self.store!.current_ticket + 1
+			    user_ticket.ticket_number = NSNumber(value:1).description
+			    user_ticket.unique_id = CLong(NSNumber(value:(self.store!.current_ticket.int64Value + 1)))
 				let map = user_ticket.getDictionaryFormat()
 				a["0"] = map as AnyObject?
 				currentData.value = a

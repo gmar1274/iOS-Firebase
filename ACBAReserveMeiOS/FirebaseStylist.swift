@@ -20,6 +20,25 @@ class FirebaseStylist: NSObject{
 	var store_number:NSNumber?
 	var haircut_time:NSNumber=35//in mins 35 by default
 	var pseudo_wait:NSNumber = 0
+	var ticket_price:NSNumber?
+	
+	required init(owner:FirebaseEmployee, user:FirebaseEmployee){
+		super.init()
+		self.name = user.name
+		self.available = false
+		self.fname = ""
+		self.mname = ""
+		self.lname = ""
+		self.phone = user.phone
+		self.wait = 0
+		//self.pseudo_wait = 0
+		//self.haircut_time = 35
+		self.id = user.id
+		self.ticket_price = 0;
+		self.store_number = NSNumber(value: CLong(user.store_number!)!)
+		
+	}
+	
 	required init(snapshot: FIRDataSnapshot) {
 		super.init()
 		
@@ -98,7 +117,15 @@ class FirebaseStylist: NSObject{
 	override var hash: Int {
 		return self.id!.hashValue
 	}
-	
-	
+	func getDictionaryFormat() -> [String:AnyObject]{
+		var dic: Dictionary<String,AnyObject> = [:]
+		let mo = Mirror(reflecting: self)
+		for (index, attr) in mo.children.enumerated(){
+			if let property_name = attr.label as String! {
+				dic[property_name] = attr.value as AnyObject!
+			}
+		}
+		return dic
+	}
 	
 }

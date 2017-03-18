@@ -9,17 +9,18 @@
 import Foundation
 class LatLng{
 	
-	var latitude:CDouble
-	var longitude:CDouble
+	var latitude:NSNumber
+	var longitude:NSNumber
 	init(lat:CDouble,lon:CDouble) {
-		self.latitude = lat
-		self.longitude = lon
+		self.latitude = NSNumber(value: lat)
+		self.longitude = NSNumber(value: lon)
 	}
 	
 	func getLatitude() -> CDouble {
-		return self.latitude
+		return self.latitude.doubleValue
 	}
 	func getLongitude() -> CDouble {
-		return self.longitude
+		return self.longitude.doubleValue
 	}
+	public var description: String { return "{\(self.latitude), \(self.longitude)} " }
 }

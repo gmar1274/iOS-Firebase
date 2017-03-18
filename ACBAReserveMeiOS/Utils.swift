@@ -53,13 +53,9 @@ class Utils{
 		return Data()
 	}
 	static func callNumber(_ phoneNumber:String) {
-			if let phoneCallURL:URL = URL(string: "tel://\(phoneNumber)") {
-    let application:UIApplication = UIApplication.shared
-    if (application.canOpenURL(phoneCallURL)) {
-		application.openURL(phoneCallURL);
-    }
-			
-		}
+			 let phoneCallURL:URL = URL(string: "tel://\(phoneNumber)")!
+             UIApplication.shared.openURL(phoneCallURL)
+		
 	}//////////end call method
 	static func getTodaysTimeSetList(day:Date, appointments:[Date:Date] ) -> [TimeSet]{
 		
@@ -98,12 +94,33 @@ class Utils{
 	}
 	//sets the miles_away property if in bounds
 	static func isInRadiusSearch(user_loc : CLLocation, store:FirebaseStore, miles:CDouble) -> Bool{
-		let store_loc = CLLocation(latitude: (store.location?.latitude)!, longitude: (store.location?.longitude)!)
+		let store_loc = CLLocation(latitude: CLLocationDegrees((store.location?.latitude)!), longitude: CLLocationDegrees((store.location?.longitude)!))
 		let dist = (user_loc.distance(from: store_loc) )/1609.344//convert meters to miles by dividing
 		if dist <= miles {
-			store.miles_away = dist
+			store.miles_away = NSNumber(value:dist)
 			return true
 		}
 		return false
 	}
+	static func generateID(username:String) -> String{
+		return String(username.hashValue)
+	}
+	static func formatPhone(phone:String) -> String{
+		var phonee = NSMutableString()
+		phonee.append(phone as String)
+		if(phonee.description.characters.count==11){
+			phonee.insert("+", at: 0)
+			phonee.insert("(", at: 2)
+			phonee.insert(")", at: 6)
+			phonee.insert("-", at: 10)
+			
+			return phonee.description
+		}else{
+			phonee.insert("(", at: 0)
+			phonee.insert(")", at: 4)
+			phonee.insert("-", at: 8)
+		return "+1"+phonee.description
+		}
+	}
+	
 }//end utils class

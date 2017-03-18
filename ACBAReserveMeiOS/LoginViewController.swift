@@ -42,8 +42,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 	
 	@IBOutlet var password: UITextField!
 	
-	static var locationManager: CLLocationManager? = nil
-	static var location: CLLocation? = nil
+	 var locationManager: CLLocationManager? = nil
+	 var location: CLLocation? = nil
 	
 	static var store_id:CLong = -1
 	static var stylist_id:String = ""
@@ -86,6 +86,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 		let ref = FIRDatabase.database().reference().child("employees")
 		ref.queryOrderedByKey().observeSingleEvent(of: FIRDataEventType.value, with: {(snapshot) in
 			for ds in snapshot.children{
+				
 				let emp = FirebaseEmployee(snapshot: ds as! FIRDataSnapshot)
 				if emp.app_username == username && password == emp.app_password{
 					user = emp
@@ -139,11 +140,17 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 		
 	}
 	
-	
+	////GO TO MAIN MENU. FIREBASE LOGIN IN AS ANON
 	 func loginSuccess(){
 		//load user credentials
 		//then go to
-		performSegue(withIdentifier: "guest", sender:self)
+		//performSegue(withIdentifier: "guest", sender:self)
+		let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabcontroller") as! MainTabControllerViewController
+		vc.location = self.location
+		vc.locationManager = self.locationManager
+		self.present(vc, animated: false, completion: nil)
+		
+		
 	}
 	func stylistScreen(store_id:CLong, stylist_id:String){
 		let vc = storyboard?.instantiateViewController(withIdentifier: "stylist_tbc")
@@ -178,12 +185,12 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		LoginViewController.locationManager=CLLocationManager()
-		LoginViewController.locationManager!.delegate = self
-		LoginViewController.locationManager!.requestAlwaysAuthorization()
-		LoginViewController.locationManager!.desiredAccuracy = kCLLocationAccuracyBest
-		LoginViewController.locationManager!.requestWhenInUseAuthorization()
-		LoginViewController.locationManager!.startUpdatingLocation()
+		locationManager=CLLocationManager()
+		locationManager!.delegate = self
+		locationManager!.requestAlwaysAuthorization()
+		locationManager!.desiredAccuracy = kCLLocationAccuracyBest
+		locationManager!.requestWhenInUseAuthorization()
+		locationManager!.startUpdatingLocation()
 		
 		
 		//adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
@@ -212,7 +219,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 	}
 	func locationManager(_ manager:CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
 		if status == .authorizedWhenInUse{
-			LoginViewController.locationManager?.startUpdatingLocation()
+			locationManager?.startUpdatingLocation()
 			
 			
 		}
@@ -250,7 +257,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 	}
 	
 	func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-		performSegue(withIdentifier: "guest", sender:self)
+		self.loginSuccess()
 		interstitial = createAndLoadInterstitial()
 	}
 	override func didReceiveMemoryWarning() {
@@ -260,8 +267,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		if let location = locations.first {
 			//print("Login class..Found user's location: \(location)")
-			LoginViewController.location=location
-			LoginViewController.locationManager?.stopUpdatingLocation()
+			self.location=location
+			locationManager?.stopUpdatingLocation()
 		}else{
 			//no location found
 		}

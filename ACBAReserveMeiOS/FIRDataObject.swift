@@ -23,7 +23,22 @@ class FIRDataObject: NSObject{
 		for child in snapshot.children.allObjects as? [FIRDataSnapshot] ?? []{
 			//print("CHILD IN FIROBJJ:: \(child)\n\nKEYY: \(child.key)\n\nVALUEE: \(child.value)\n")
 			if responds(to: Selector(child.key)){
-				setValue(child.value, forKey: child.key)
+				guard let ch = child as? FIRDataSnapshot else{
+					print("null")
+					continue
+				}
+				guard let key = child.key as? String else {
+					print("null")
+					continue
+				}
+				guard let val = child.value  as? NSArray  else{
+					setValue(child.value, forKey: key)
+					continue
+				}
+				setValue(val, forKey: key)
+				
+			}else{
+				//print("CHILD: \(child.key) VALUE: \(child.value)")
 			}
 		}
 	}

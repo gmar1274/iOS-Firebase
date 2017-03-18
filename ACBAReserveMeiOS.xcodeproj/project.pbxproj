@@ -29,6 +29,7 @@
 		CE1AD3501E17AFDB009452DE /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AD34F1E17AFDB009452DE /* Customer.swift */; };
 		CE1AD3531E17C96B009452DE /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AD3521E17C96B009452DE /* DateExtension.swift */; };
 		CE1C3B641E129EB500CC22D2 /* StripeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C3B631E129EB500CC22D2 /* StripeViewController.swift */; };
+		CE22919C1E771D97004F494E /* StoreSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22919B1E771D97004F494E /* StoreSettingsViewController.swift */; };
 		CE33D2F71E4B02A3001C6A8C /* POSTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33D2F61E4B02A3001C6A8C /* POSTAPIClient.swift */; };
 		CE33D2F91E4B440D001C6A8C /* FirebaseTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33D2F81E4B440D001C6A8C /* FirebaseTicket.swift */; };
 		CE3B05851E0B9F8C00704C79 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B05841E0B9F8C00704C79 /* Service.swift */; };
@@ -104,6 +105,7 @@
 		CE1AD34F1E17AFDB009452DE /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		CE1AD3521E17C96B009452DE /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		CE1C3B631E129EB500CC22D2 /* StripeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeViewController.swift; sourceTree = "<group>"; };
+		CE22919B1E771D97004F494E /* StoreSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSettingsViewController.swift; sourceTree = "<group>"; };
 		CE33D2F61E4B02A3001C6A8C /* POSTAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSTAPIClient.swift; sourceTree = "<group>"; };
 		CE33D2F81E4B440D001C6A8C /* FirebaseTicket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTicket.swift; sourceTree = "<group>"; };
 		CE3B05841E0B9F8C00704C79 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				CE1188741E23548300A1D716 /* ExampleStripeViewController.swift */,
 				CE506FEC1E4F21F20049CF1B /* EmployeeCurrentTicketsViewController.swift */,
 				CE506FF21E4F43E10049CF1B /* PastTicketsViewController.swift */,
+				CE22919B1E771D97004F494E /* StoreSettingsViewController.swift */,
 			);
 			name = UIViewControllers;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				CE78E1521E46B55600E67AD0 /* FirebaseStore.swift in Sources */,
 				CE78E1541E46B6AB00E67AD0 /* LatLng.swift in Sources */,
 				CEB53F8E1E496F1000E697B9 /* FirebaseStylist.swift in Sources */,
+				CE22919C1E771D97004F494E /* StoreSettingsViewController.swift in Sources */,
 				CE1188791E2359CA00A1D716 /* Buttons.swift in Sources */,
 				CE33D2F71E4B02A3001C6A8C /* POSTAPIClient.swift in Sources */,
 				CE109ED91E1F2D1200DF379B /* UpcomingAppointmentsViewController.swift in Sources */,

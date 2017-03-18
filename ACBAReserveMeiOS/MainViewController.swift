@@ -11,7 +11,17 @@ import MapKit
 import CoreLocation
 import Firebase
 
-class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource{
+class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate   {
+	
+	public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		return 1
+	}
+
+	
+	public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		return self.picker_data.count
+	}
+
 
 	@IBOutlet weak var searchLabel: UILabel!
 	@IBOutlet weak var mapView: MKMapView!
@@ -53,9 +63,12 @@ class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManage
 	/**On create load the locationManager and get location ,then send a Post request and update mapView*/
     override func viewDidLoad() {
         super.viewDidLoad()
+		self.sortByPicker.delegate = self
+		self.sortByPicker.dataSource = self
 		self.mainTabController = tabBarController as! MainTabControllerViewController
-		
-		if (LoginViewController.locationManager == nil){ //get location if not already have
+		 location = self.mainTabController?.location
+		 locationManager = self.mainTabController?.locationManager
+		if (locationManager == nil){ //get location if not already have
 			print("Location manager is null")
 			self.dismiss(animated: true, completion: nil)
 			locationManager=CLLocationManager()
@@ -65,19 +78,15 @@ class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManage
 			locationManager!.requestWhenInUseAuthorization()
 			locationManager!.startUpdatingLocation()
 			
-		}else{
-			locationManager = LoginViewController.locationManager
-			location = LoginViewController.location
 		}
 		
-		self.mapView.delegate=self
+		
 		// Register custom cell
 		//var nib = UINib(nibName: "CustomTableViewCell", bundle: nil)
 		//tableView.registerNib(nib, forCellReuseIdentifier: "Cell")
 		tableView.delegate =  self
 		tableView.dataSource = self
-		
-		//make a POST call get all stores
+		self.mapView.delegate=self		//make a POST call get all stores
 		//PostRequest.store_request(self)
 		searchForStores()
 		
@@ -88,7 +97,12 @@ class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManage
 	func searchForStores(){
 		self.clearStores()
 		self.clearMapView()
-		self.centerMapOnLocation(self.location!)
+		if location ==  nil{
+			location = locationManager?.location
+		}
+		 self.centerMapOnLocation(self.location!)
+			
+		
 		 alert = UIAlertController(title: "Searching nearby shops", message: "Please wait...", preferredStyle: .alert)
 		
 		alert?.view.tintColor = UIColor.black
@@ -102,25 +116,19 @@ class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManage
 		present(alert!, animated: true, completion: nil)//display seraching
 		//let timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector:#selector(self.update), userInfo: nil, repeats: true)//in seconds
 		//add a query for stores
-		FIRDatabase.database().reference().child("user").queryOrderedByKey().observeSingleEvent(of:FIRDataEventType.value, with: {(snapshot) in
-			//let store_arr = snapshot.value as? NSArray
+		FIRDatabase.database().reference().child("user").observeSingleEvent(of:FIRDataEventType.value, with: {(snapshot) in
 			
 			for ds in snapshot.children{//for each store in Firebase db
 				let store = FirebaseStore(snapshot: ds as! FIRDataSnapshot)
 				let snap = (ds as! FIRDataSnapshot).children.allObjects as! [FIRDataSnapshot] ?? []
-				for child in snap {
-					let c = child as! FIRDataSnapshot
-					if c.hasChildren(){
-						let lat = c.childSnapshot(forPath: "latitude").value as! CDouble
-						let lon = c.childSnapshot(forPath: "longitude").value as! CDouble
-						store.setLocation(latlng: LatLng(lat: lat, lon: lon))
-					}
-					let sn = (ds as! FIRDataSnapshot).childSnapshot(forPath:"store_number").value as! CLong
-					store.store_number = sn
-					let tp = (ds as! FIRDataSnapshot).childSnapshot(forPath:"ticket_price").value as! CDouble
-					store.ticket_price = tp
-					
-				}
+				
+				////////////read the PERIOD AND LOCATION
+					let location = (ds as! FIRDataSnapshot).childSnapshot(forPath:"location").value as! [String:Any]
+				let loc = LatLng(lat: location["latitude"] as! CDouble, lon: location["longitude"] as! CDouble)
+				store.location = loc
+				store.setLocation(latlng: loc)
+				
+				/////////
 				
 				
 				if Utils.isInRadiusSearch(user_loc: self.location!, store: store, miles: CDouble(self.radius)) {
@@ -129,7 +137,8 @@ class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManage
 				}
 				
 			}//end for datasnap all list...
-			self.store_list.sort(by: {$0.miles_away! < $1.miles_away!})
+			
+			self.store_list.sort(by: { CDouble(($0.miles_away?.doubleValue)!) < CDouble(($1.miles_away?.doubleValue)!)})
 			self.tableView.reloadData()
 			if self.store_list != nil && self.store_list.count > 0{
 				self.mainTabController?.setCurrentStore(store: self.store_list[0])//by default first store
@@ -138,6 +147,44 @@ class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManage
 			
 		})//end firebase single event listener
 	}
+	/****
+	for child in snap {
+	let c = child as! FIRDataSnapshot
+	if c.hasChildren(){
+	let lat = c.childSnapshot(forPath: "latitude").value as! CDouble
+	let lon = c.childSnapshot(forPath: "longitude").value as! CDouble
+	store.setLocation(latlng: LatLng(lat: lat, lon: lon))
+	}
+	let sn = (ds as! FIRDataSnapshot).childSnapshot(forPath:"store_number").value as! CLong
+	store.store_number = sn
+	let tp = (ds as! FIRDataSnapshot).childSnapshot(forPath:"ticket_price").value as! CDouble
+	store.ticket_price = tp
+	
+	}
+
+
+
+*/
+	
+	///////////start picker deleagates
+	@IBOutlet var sortByPicker: UIPickerView!
+	let picker_data = ["Distance", "Name"]
+	
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		return self.picker_data[row]
+	}
+ 
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		self.selectedPosition = 0 //reset index
+		if row == 0{
+			self.store_list.sort(by: { Double(($0.miles_away?.doubleValue)!) < Double(($1.miles_away?.doubleValue)!) })
+		}else if row == 1{
+			self.store_list.sort(by: {$0.name! < $1.name! })
+		}
+		self.tableView.reloadData()
+	}
+	//////////////end picker delegates
+	
 	
 	func clearMapView(){
 		if self.mapView.annotations != nil && self.mapView.annotations.count>0{
@@ -159,32 +206,37 @@ class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManage
 	}
 	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 		if (annotation is MKUserLocation) {
-			//if annotation is not an MKPointAnnotation (eg. MKUserLocation),
-			//return nil so map draws default view for it (eg. blue dot)...
-			return nil
-		}
-		if let annotation = annotation as? FirebaseStore {
-			let identifier = "pin"
-			var view: MKPinAnnotationView
-			if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-				as? MKPinAnnotationView { // 2
-				dequeuedView.annotation = annotation
-				view = dequeuedView
-			} else {
-				// 3
-				view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-				view.canShowCallout = true
-				//view.calloutOffset = CGPoint(x: -5, y: 5)
-				
+				//if annotation is not an MKPointAnnotation (eg. MKUserLocation),
+				//return nil so map draws default view for it (eg. blue dot)...
+				return nil
 			}
-			return view
-		}
-		return nil
+			if let annotation = annotation as? FirebaseStore {
+				let identifier = "pin"
+				var view: MKPinAnnotationView
+				if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+					as? MKPinAnnotationView { // 2
+					dequeuedView.annotation = annotation
+					view = dequeuedView
+					
+					return view
+				} else {
+					
+					// 3
+					view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+					view.canShowCallout = true
+					view.calloutOffset = CGPoint(x: -5, y: 5)
+			view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+					
+				}
+				return view
+			}
+			return nil
+	}
 	
-}
+	
 	func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
 	             calloutAccessoryControlTapped control: UIControl) {
-  let location = view.annotation as! Store
+  let location = view.annotation as! FirebaseStore
   let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
   location.mapItem().openInMaps(launchOptions: launchOptions)
 	}
@@ -241,7 +293,7 @@ func centerMapOnLocation(_ location: CLLocation) {
 		selectedCell.contentView.backgroundColor = UIColor.gray
 		selectedPosition = indexPath.row
 		//print("You selected cell #\(indexPath.row)!")
-		let location = CLLocation(latitude: store.location!.latitude, longitude: store.location!.longitude)
+		let location = CLLocation(latitude: CLLocationDegrees(store.location!.latitude), longitude: CLLocationDegrees(store.location!.longitude))
 		centerMapOnLocation(location)
 		self.mainTabController?.setCurrentStore(store: store)//update the controller
 	}
@@ -256,12 +308,12 @@ func centerMapOnLocation(_ location: CLLocation) {
 		cell.address.text = store.address!
 		
 		
-		cell.hours.text = store.operatingHours()
+		cell.hours.text = store.getOperationalHours()
 		let nf = NumberFormatter()
 		nf.numberStyle = .currency
 		nf.currencySymbol = ""
 		let dist = store.miles_away
-		cell.distance.text = nf.string(from: NSNumber(value: dist!))
+		cell.distance.text = nf.string(from: NSNumber(value: (dist?.int64Value)!))
 		
 		/**let tapGestureRecognizer = UITapGestureRecognizer(target:self, action: Selector("image"))
 		
