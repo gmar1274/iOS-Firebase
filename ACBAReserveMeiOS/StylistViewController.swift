@@ -27,6 +27,7 @@ class StylistViewController: UIViewController, UITableViewDataSource, UITableVie
 		let df = DateFormatter()
 		df.dateFormat = "MMM/dd/yyyy"
 		var date:String = ""
+		let tab = self.tabBarController as! CustomTabBarController
 		if isUpcoming {
 			//date = UpcomingAppointmentsViewController.date
 			self.timeArray = (self.reservations?.getTimeSetArrayForDate(date: self.date))!
@@ -34,8 +35,8 @@ class StylistViewController: UIViewController, UITableViewDataSource, UITableVie
 		}else{
 			 date = df.string(from: Date())
 				self.date_label.text = date
-		self.store_id = LoginViewController.store_id
-		self.stylist_id = LoginViewController.stylist_id
+		self.store_id = CLong(tab.store_id)!
+		self.stylist_id = tab.sty_id
 		}
 		self.tableView.delegate = self
 		self.tableView.dataSource = self

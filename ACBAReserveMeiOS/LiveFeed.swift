@@ -133,7 +133,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 				//print("TABLE VIEW DS: \(child)\n")
 				var sty = FirebaseStylist(snapshot: child)
 				sty.store_number = self.store?.store_number as NSNumber?
-				sty.pseudo_wait = stylist.pseudo_wait
+				sty.psuedo_wait = stylist.psuedo_wait
 				sty.wait = stylist.wait
 				self.stylist_array.remove(at: indexPath.row)
 				self.stylist_array.insert(sty, at: indexPath.row)
@@ -349,14 +349,14 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 			if q[sty.id!] == nil {// NOT ACTIVE STYLIST ALSO NOT STORE..
 				sty_arr.append(s!)
 			}else{
-				s!.pseudo_wait = NSNumber(value: Int((q[sty.id!]?.index(of: nextTicket))!))
+				s!.psuedo_wait = NSNumber(value: Int((q[sty.id!]?.index(of: nextTicket))!))
 				sty_arr.append(s!)
-				lowest_time.append(Int((s?.pseudo_wait)!))
+				lowest_time.append(Int((s?.psuedo_wait)!))
 			}
 		}
 		lowest_time.sort(by: {$0<$1})
 		let store = self.hashMap["-1"]//no pref queue
-		store?.pseudo_wait = NSNumber(value:lowest_time[0]) ?? 0
+		store?.psuedo_wait = NSNumber(value:lowest_time[0]) ?? 0
 		sty_arr.insert(store!, at: 0)
 		
 		self.stylist_array.removeAll()
@@ -402,7 +402,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 			storage.data(withMaxSize: 10*1024*1024, completion: { data, error in//10 mb
 				if let error = error{
 					print("file error download exit...err: \(error)")
-					print("err b4 count: \(self.stylist_bitmaps.count)")
+					//print("err b4 count: \(self.stylist_bitmaps.count)")
 					//if let resourcePath = Bundle.main.resourcePath {
 					//	let imgName = "120.png"
 					//	let path = resourcePath + "/" + imgName
@@ -411,7 +411,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 						self.stylist_bitmaps[sty.id!] = UIImagePNGRepresentation(image!)
 					//}
 					
-					print("err after count: \(self.stylist_bitmaps.count)")
+					//print("err after count: \(self.stylist_bitmaps.count)")
 				}else{
 					print("image success...")
 					self.stylist_bitmaps[sty.id!] = data!
@@ -486,7 +486,7 @@ class LiveFeed: UIViewController, UITableViewDelegate, UITableViewDataSource , S
 		var arr:[FirebaseStylist] = []
 		for sty in self.stylist_array{
 			sty.wait = 0
-			sty.pseudo_wait = 0
+			sty.psuedo_wait = 0
 			arr.append(sty)
 		}
 		self.stylist_array.removeAll()

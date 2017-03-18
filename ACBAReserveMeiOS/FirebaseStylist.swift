@@ -19,8 +19,9 @@ class FirebaseStylist: NSObject{
 	var id:String?
 	var store_number:NSNumber?
 	var haircut_time:NSNumber=35//in mins 35 by default
-	var pseudo_wait:NSNumber = 0
+	var psuedo_wait:NSNumber = 0
 	var ticket_price:NSNumber?
+	var store_id: NSNumber?
 	
 	required init(owner:FirebaseEmployee, user:FirebaseEmployee){
 		super.init()
@@ -36,7 +37,7 @@ class FirebaseStylist: NSObject{
 		self.id = user.id
 		self.ticket_price = 0;
 		self.store_number = NSNumber(value: CLong(user.store_number!)!)
-		
+		self.store_id = self.store_number
 	}
 	
 	required init(snapshot: FIRDataSnapshot) {
@@ -52,7 +53,7 @@ class FirebaseStylist: NSObject{
 				setValue(dict[key] , forKey: key)
 			}else{
 				
-				print("Key: \(key) Value: \(dict[key]) not found..\n")
+				//print("Key: \(key) Value: \(dict[key]) not found..\n")
 			}
 			
 		}
@@ -111,7 +112,7 @@ class FirebaseStylist: NSObject{
 		}
 	}
 	func predictWait() -> CDouble{
-		return CDouble(self.pseudo_wait.doubleValue * self.haircut_time.doubleValue)
+		return CDouble(self.psuedo_wait.doubleValue * self.haircut_time.doubleValue)
 	}
 	
 	override var hash: Int {

@@ -225,8 +225,17 @@ class MainViewController: UIViewController , MKMapViewDelegate, CLLocationManage
 					view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
 					view.canShowCallout = true
 					view.calloutOffset = CGPoint(x: -5, y: 5)
-			view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-					
+			        view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+					//THIS IS THE GOOD BIT
+					let subtitleView = UILabel()
+					subtitleView.font = subtitleView.font.withSize(9)
+					subtitleView.numberOfLines = 0
+					subtitleView.text = annotation.title
+					if #available(iOS 9.0, *) {
+						view.detailCalloutAccessoryView = subtitleView
+					} else {
+						// Fallback on earlier versions
+					}
 				}
 				return view
 			}

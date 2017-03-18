@@ -36,7 +36,7 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBannerViewDelegate,GADInterstitialDelegate {
 	
-	var TEST = true
+	var TEST:Bool = true
 	
 	@IBOutlet var username: UITextField!
 	
@@ -45,8 +45,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 	 var locationManager: CLLocationManager? = nil
 	 var location: CLLocation? = nil
 	
-	static var store_id:CLong = -1
-	static var stylist_id:String = ""
+	 var store_id:CLong = -1
+	 var stylist_id:String = ""
 	@IBAction func login(_ sender: AnyObject) {
 		let u = username.text
 		let p = password.text
@@ -153,10 +153,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 		
 	}
 	func stylistScreen(store_id:CLong, stylist_id:String){
-		let vc = storyboard?.instantiateViewController(withIdentifier: "stylist_tbc")
-		LoginViewController.store_id = store_id
-		LoginViewController.stylist_id = stylist_id
-		self.present(vc!, animated: true, completion: nil)
+		let vc = storyboard?.instantiateViewController(withIdentifier: "stylist_tbc") as! CustomTabBarController
+		vc.sty_id = self.stylist_id
+		vc.store_id = self.store_id.description
+		self.present(vc, animated: true, completion: nil)
 		//performSegue(withIdentifier: "stylist", sender: self)
 		//go swegue to stylist 
 		//performSegue(withIdentifier: "stylist", sender: self)
@@ -184,7 +184,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		self.TEST = true
 		locationManager=CLLocationManager()
 		locationManager!.delegate = self
 		locationManager!.requestAlwaysAuthorization()
@@ -204,17 +204,22 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, GADBanne
 		self.adBannerView.adSize = kGADAdSizeSmartBannerPortrait
 		adBannerView.adUnitID = "ca-app-pub-9309556355508377/2192542441"
 		adBannerView.rootViewController = self
+		//adBannerView =  GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+		//adBannerView.frame = CGRect(x: adBannerView.frame.minX, y: adBannerView.frame.minX, width: 320, height: 50)
 		var request:GADRequest = GADRequest()
+		
 		if TEST{
-		request.testDevices = ["2077ef9a63d2b398840261c8221a0c9b"]
+		    request.testDevices = ["2077ef9a63d2b398840261c8221a0c9b"]
 		}
-		adBannerView.load(request)
+		 		adBannerView.load(request)
 		
 	}
 	func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
+		print("ad loaded ")
 		self.adBannerView.isHidden = false
 	}
 	func adView(_ bannerView: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
+		print("ERRRRR: \(error)")
 		self.adBannerView.isHidden = true
 	}
 	func locationManager(_ manager:CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){

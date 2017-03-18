@@ -47,7 +47,7 @@ class PastTicketsViewController: UIViewController , UITableViewDelegate, UITable
 		//super.viewWillAppear(animated)
 		let tc = self.tabBarController as! MainTabControllerViewController
 		self.tickets = tc.pastTickets
-		print("tickets...\(tickets) \nvs\n\(tc.pastTickets)")
+		//print("tickets...\(tickets) \nvs\n\(tc.pastTickets)")
 		self.ticketsTableView.delegate = self
 		self.ticketsTableView.dataSource = self
 		self.ticketsTableView.reloadData()

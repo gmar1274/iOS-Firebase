@@ -12,7 +12,8 @@ import UIKit
 class CustomTabBarController: UITabBarController {
 
 	var employee:FirebaseEmployee?
-	
+	var sty_id:String = ""
+	var store_id:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 		if employee?.type != "OWNER" {
