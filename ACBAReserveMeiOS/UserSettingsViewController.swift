@@ -103,7 +103,7 @@ class UserSettingsViewController: UIViewController, UINavigationControllerDelega
 		ref.data(withMaxSize: 10*1024*1024, completion: { data, error in//10 mb
 			if let error = error{
 				print("file error download exit...err: \(error)")
-				
+				self.imageView.image = UIImage(named: "120")!
 			}else{
 				print("image success...")
 				self.imageView.image = UIImage(data: data!)
@@ -309,5 +309,8 @@ class UserSettingsViewController: UIViewController, UINavigationControllerDelega
 		//present(alert, animated: true, completion: nil)//display seraching
 	}
 	
+	@IBAction func logOut(_ sender: Any) {
+		self.dismiss(animated: true, completion: nil)
+	}
 
 }

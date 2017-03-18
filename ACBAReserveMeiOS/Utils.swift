@@ -106,6 +106,9 @@ class Utils{
 		return String(username.hashValue)
 	}
 	static func formatPhone(phone:String) -> String{
+		if phone.characters.count == 0 || phone.characters.count == 3{
+			return "N/A"
+		}
 		var phonee = NSMutableString()
 		phonee.append(phone as String)
 		if(phonee.description.characters.count==11){
